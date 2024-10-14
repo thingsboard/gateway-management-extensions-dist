@@ -1,7 +1,6 @@
 # ThingsBoard Gateway Management Extension Distributions
 
-The ThingsBoard Gateway Management Extension project provides distribution files designed to facilitate gateway configurations and connector management using a modular and component-based approach.
-
+The project offers distribution files for the [ThingsBoard Gateway Management Extension v1.0][1], designed to streamline gateway configuration and connector management using a modular, component-based approach.
 ## Steps to Run the Extension
 
 ### 1. Access Files
@@ -41,4 +40,6 @@ The ThingsBoard Gateway Management Extension project provides distribution files
 ```
 
 ### 6. Add to Custom Resources
-- Update the Gateways Dashboard (`gateways.json` - dashboard file) to replace `${GATEWAY_RESOURCE_ID}` with the actual resource ID in the `"customResources"` section at line `1922`.
+- Update the Gateways Dashboard (`gateways.json` - dashboard file) to replace `${GATEWAY_RESOURCE_ID}` instances with the actual resource ID in the `"customResources"`.
+
+[1]: https://github.com/thingsboard/gateway-management-extensions

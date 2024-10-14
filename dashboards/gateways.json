@@ -189,7 +189,15 @@
                 "customHtml": "<div class=\"container\">\n    <mat-toolbar fxLayout=\"row\" color=\"primary\">\n        <h2>{{ 'gateway.launch-command' | translate }}</h2>\n        <span fxFlex></span>\n        <div [tb-help]=\"'gatewayInstall'\"></div>\n        <button mat-icon-button (click)=\"cancel()\" type=\"button\">\n            <mat-icon class=\"material-icons\">close</mat-icon>\n        </button>\n    </mat-toolbar>\n    <tb-gateway-command [deviceId]=\"entityId\"></tb-gateway-command>\n    <div mat-dialog-actions fxLayout=\"row\" fxLayoutAlign=\"end center\">\n        <button mat-button color=\"primary\"\n            type=\"button\"\n            (click)=\"cancel()\" cdkFocusInitial>\n            {{ 'action.close' | translate }}\n        </button>\n    </div>\n</div>\n",
                 "customCss": ".container {\n    display: grid;\n    grid-template-rows: min-content minmax(auto, 1fr) min-content;\n    height: 100%;\n    max-height: 100vh;\n    width: 600px;\n    max-width: 100%;\n}",
                 "customFunction": "let $injector = widgetContext.$scope.$injector;\nlet customDialog = $injector.get(widgetContext.servicesMap.get('customDialog'));\n\nopenCommands();\n\nfunction openCommands() {\n    customDialog.customDialog(htmlTemplate, CommandsDialogController, {panelClass: \"test\"}).subscribe();\n}\n\nfunction CommandsDialogController(instance) {\n    let vm = instance;\n    \n    vm.entityId = entityId.id;\n\n    vm.cancel = function() {\n        vm.dialogRef.close(null);\n    };\n}\n",
-                "customResources": [],
+                "customResources": [
+                  {
+                    "url": {
+                      "entityType": "TB_RESOURCE",
+                      "id": "${GATEWAY_RESOURCE_ID}"
+                    },
+                    "isModule": true
+                  }
+                ],
                 "openInSeparateDialog": false,
                 "openInPopover": false,
                 "id": "ae2e5995-505f-a241-5fb2-6cbaf08b1b55"
@@ -203,7 +211,15 @@
                 "customHtml": "<mat-progress-bar color=\"warn\" mode=\"indeterminate\" *ngIf=\"isLoading$ | async\">\n</mat-progress-bar>\n<tb-gateway-configuration\n    class=\"gateway-config\"\n    mat-dialog-content\n    [device]=\"device\"\n    [dialogRef]=\"dialogRef\">\n</tb-gateway-configuration>",
                 "customCss": ".gateway-config {\n    width: 800px !important;\n    padding: 0 !important;\n    min-height: 75vh;\n    max-width: 100%;\n    display: grid !important;\n}\n\n@media screen and (max-width: 599px) {\n    .mat-mdc-dialog-content {\n        max-height: calc(100% - 60px) !important;\n    }\n}",
                 "customFunction": "let $injector = widgetContext.$scope.$injector;\nlet customDialog = $injector.get(widgetContext.servicesMap.get('customDialog'));\n\nopenAddEntityDialog();\n\nfunction openAddEntityDialog() {\n    customDialog.customDialog(htmlTemplate, AddEntityDialogController).subscribe();\n}\n\nfunction AddEntityDialogController(instance) {\n    let vm = instance;\n    \n    vm.device = additionalParams.entity.id;\n\n    vm.cancel = function() {\n        vm.dialogRef.close(null);\n    };\n}\n",
-                "customResources": [],
+                "customResources": [
+                  {
+                    "url": {
+                      "entityType": "TB_RESOURCE",
+                      "id": "${GATEWAY_RESOURCE_ID}"
+                    },
+                    "isModule": true
+                  }
+                ],
                 "openInSeparateDialog": false,
                 "openInPopover": false,
                 "id": "a54acd30-5c5f-d709-b892-5fc14f780e34"
