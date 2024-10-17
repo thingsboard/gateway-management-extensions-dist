@@ -12,7 +12,7 @@
       {
         "url": {
           "entityType": "TB_RESOURCE",
-          "id": "${GATEWAY_RESOURCE_ID}"
+          "id": "${RESOURCE:gateway-management-extension.js}"
         },
         "isModule": true
       }

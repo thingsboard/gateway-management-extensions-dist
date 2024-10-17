@@ -26,19 +26,19 @@ The ThingsBoard Gateway Management Extension project provides distribution files
     - **Service RPC**: `service_rpc.json`
 
 ### 4. Update the Gateways Dashboard
-- Upload or update the Gateways Dashboard using the `gateways.json` dashboard file.
+- Upload or update the Gateways Dashboard using the `gateways_dashboard.json` dashboard file.
 
 ### 5. Update the Resource ID in All Uploaded/Updated Widgets
-- Replace `"${GATEWAY_RESOURCE_ID}"` with the actual resource ID in your widget JSON files:
+- Replace `"${RESOURCE:gateway-management-extension.js}"` with the actual resource ID in your widget JSON files:
 ```json
 { 
   "url": { 
     "entityType": "TB_RESOURCE", 
-    "id": "${GATEWAY_RESOURCE_ID}", 
+    "id": "${RESOURCE:gateway-management-extension.js}", 
     "isModule": true 
   } 
 }
 ```
 
 ### 6. Add to Custom Resources
-- Update the Gateways Dashboard (`gateways.json` - dashboard file) to replace `${GATEWAY_RESOURCE_ID}` with the actual resource ID in the `"customResources"` section at line `1922`.
+- Update the Gateways Dashboard (`gateways_dashboard.json` - dashboard file) to replace `${RESOURCE:gateway-management-extension.js}` with the actual resource ID in the `"customResources"` section at line `1922`.
