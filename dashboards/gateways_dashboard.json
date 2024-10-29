@@ -193,7 +193,7 @@
                   {
                     "url": {
                       "entityType": "TB_RESOURCE",
-                      "id": "tb-resource:SlNfTU9EVUxF:b829c3c7cb75c90c26abe231cc1176115d512c0720ecfcd9a532b5e4c9f2785f"
+                      "id": "tb-resource;/api/resource/js_module/system/gateway-management-extension.js"
                     },
                     "isModule": true
                   }
@@ -215,7 +215,7 @@
                   {
                     "url": {
                       "entityType": "TB_RESOURCE",
-                      "id": "tb-resource:SlNfTU9EVUxF:b829c3c7cb75c90c26abe231cc1176115d512c0720ecfcd9a532b5e4c9f2785f"
+                      "id": "tb-resource;/api/resource/js_module/system/gateway-management-extension.js"
                     },
                     "isModule": true
                   }
@@ -1939,7 +1939,7 @@
                   {
                     "url": {
                       "entityType": "TB_RESOURCE",
-                      "id": "tb-resource:SlNfTU9EVUxF:b829c3c7cb75c90c26abe231cc1176115d512c0720ecfcd9a532b5e4c9f2785f"
+                      "id": "tb-resource;/api/resource/js_module/system/gateway-management-extension.js"
                     },
                     "isModule": true
                   }
