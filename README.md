@@ -11,7 +11,6 @@ The project offers distribution files for the [ThingsBoard Gateway Management Ex
     - **Type**: JS Module
     - **Title**: Gateway
     - **Resource File**: Upload the downloaded `gateway-management-extension.js` file.
-- After uploading, open the resource details and copy the resource ID.
 
 ### 3. Add/Update Selected Widgets
 - Upload or update the following files in the Widget Library:
@@ -26,20 +25,5 @@ The project offers distribution files for the [ThingsBoard Gateway Management Ex
 
 ### 4. Update the Gateways Dashboard
 - Upload or update the Gateways Dashboard using the `gateways_dashboard.json` dashboard file.
-
-### 5. Update the Resource ID in All Uploaded/Updated Widgets
-- Replace `"${RESOURCE:gateway-management-extension.js}"` with the actual resource ID in your widget JSON files:
-```json
-{ 
-  "url": { 
-    "entityType": "TB_RESOURCE", 
-    "id": "${RESOURCE:gateway-management-extension.js}", 
-    "isModule": true 
-  } 
-}
-```
-
-### 6. Add to Custom Resources
-- Update the Gateways Dashboard (`gateways_dashboard.json` - dashboard file) to replace `${RESOURCE:gateway-management-extension.js}` instances with the actual resource ID in the `"customResources"`.
 
 [1]: https://github.com/thingsboard/gateway-management-extensions
