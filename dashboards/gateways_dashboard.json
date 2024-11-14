@@ -237,6 +237,17 @@
                 "openInSeparateDialog": false,
                 "openInPopover": false,
                 "id": "e27eea56-c57c-0a45-eb1d-f48f19e5356b"
+              },
+              {
+                "name": "Delete gateway",
+                "icon": "delete",
+                "useShowWidgetActionFunction": false,
+                "showWidgetActionFunction": "return true;",
+                "type": "custom",
+                "customFunction": "const { $scope, servicesMap } = widgetContext;\nconst $injector = $scope.$injector;\nconst dialogs = $injector.get(servicesMap.get('dialogs'));\nconst deviceService = $injector.get(servicesMap.get('deviceService'));\n\nopenDeleteDeviceDialog();\n\nfunction openDeleteDeviceDialog() {\n  const title = `Are you sure you want to delete the gateway device '${entityName}?`;\n  const content = 'Be careful, after the confirmation, the device and all related data will become unrecoverable!';\n  \n  dialogs.confirm(title, content, 'Cancel', 'Delete').subscribe(result => {\n    if (result) {\n      deleteDevice();\n    }\n  });\n}\n\nfunction deleteDevice() {\n  deviceService.deleteDevice(entityId.id).subscribe(() => {\n    widgetContext.updateAliases();\n  });\n}",
+                "openInSeparateDialog": false,
+                "openInPopover": false,
+                "id": "0ec170eb-de35-cab1-99a1-a922eb42cdf0"
               }
             ],
             "rowClick": [
