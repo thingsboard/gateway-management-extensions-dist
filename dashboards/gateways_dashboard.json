@@ -1,6 +1,6 @@
 {
   "title": "ThingsBoard IoT Gateways",
-  "image": "tb-image:Z2F0ZXdheS1kYXNoYm9hcmRfKDEpLnBuZw==:Z2F0ZXdheS1kYXNoYm9hcmQucG5n;data:image/png;base64,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",
+  "image": "tb-image;/api/images/system/gateway-dashboard.png",
   "mobileHide": false,
   "mobileOrder": 6,
   "configuration": {
@@ -191,10 +191,7 @@
                 "customFunction": "let $injector = widgetContext.$scope.$injector;\nlet customDialog = $injector.get(widgetContext.servicesMap.get('customDialog'));\n\nopenCommands();\n\nfunction openCommands() {\n    customDialog.customDialog(htmlTemplate, CommandsDialogController, {panelClass: \"test\"}).subscribe();\n}\n\nfunction CommandsDialogController(instance) {\n    let vm = instance;\n    \n    vm.entityId = entityId.id;\n\n    vm.cancel = function() {\n        vm.dialogRef.close(null);\n    };\n}\n",
                 "customResources": [
                   {
-                    "url": {
-                      "entityType": "TB_RESOURCE",
-                      "id": "${RESOURCE:gateway-management-extension.js}"
-                    },
+                    "url": "tb-resource;/api/resource/js_module/system/gateway-management-extension.js",
                     "isModule": true
                   }
                 ],
@@ -213,10 +210,7 @@
                 "customFunction": "let $injector = widgetContext.$scope.$injector;\nlet customDialog = $injector.get(widgetContext.servicesMap.get('customDialog'));\n\nopenAddEntityDialog();\n\nfunction openAddEntityDialog() {\n    customDialog.customDialog(htmlTemplate, AddEntityDialogController).subscribe();\n}\n\nfunction AddEntityDialogController(instance) {\n    let vm = instance;\n    \n    vm.device = additionalParams.entity.id;\n\n    vm.cancel = function() {\n        vm.dialogRef.close(null);\n    };\n}\n",
                 "customResources": [
                   {
-                    "url": {
-                      "entityType": "TB_RESOURCE",
-                      "id": "${RESOURCE:gateway-management-extension.js}"
-                    },
+                    "url": "tb-resource;/api/resource/js_module/system/gateway-management-extension.js",
                     "isModule": true
                   }
                 ],
@@ -244,7 +238,7 @@
                 "useShowWidgetActionFunction": false,
                 "showWidgetActionFunction": "return true;",
                 "type": "custom",
-                "customFunction": "const { $scope, servicesMap } = widgetContext;\nconst $injector = $scope.$injector;\nconst dialogs = $injector.get(servicesMap.get('dialogs'));\nconst deviceService = $injector.get(servicesMap.get('deviceService'));\n\nopenDeleteDeviceDialog();\n\nfunction openDeleteDeviceDialog() {\n  const title = `Are you sure you want to delete the gateway device '${entityName}?`;\n  const content = 'Be careful, after the confirmation, the device and all related data will become unrecoverable!';\n  \n  dialogs.confirm(title, content, 'Cancel', 'Delete').subscribe(result => {\n    if (result) {\n      deleteDevice();\n    }\n  });\n}\n\nfunction deleteDevice() {\n  deviceService.deleteDevice(entityId.id).subscribe(() => {\n    widgetContext.updateAliases();\n  });\n}",
+                "customFunction": "const { $scope, servicesMap } = widgetContext;\nconst $injector = $scope.$injector;\nconst dialogs = $injector.get(servicesMap.get('dialogs'));\nconst deviceService = $injector.get(servicesMap.get('deviceService'));\n\nopenDeleteDeviceDialog();\n\nfunction openDeleteDeviceDialog() {\n  const title = `Are you sure you want to delete the gateway device '${entityName}'?`;\n  const content = 'Be careful, after the confirmation, the device and all related data will become unrecoverable!';\n  \n  dialogs.confirm(title, content, 'Cancel', 'Delete').subscribe(result => {\n    if (result) {\n      deleteDevice();\n    }\n  });\n}\n\nfunction deleteDevice() {\n  deviceService.deleteDevice(entityId.id).subscribe(() => {\n    widgetContext.updateAliases();\n  });\n}",
                 "openInSeparateDialog": false,
                 "openInPopover": false,
                 "id": "0ec170eb-de35-cab1-99a1-a922eb42cdf0"
@@ -1948,10 +1942,7 @@
                 "customFunction": "let $injector = widgetContext.$scope.$injector;\nlet customDialog = $injector.get(widgetContext.servicesMap.get('customDialog'));\n\nopenCommands();\n\nfunction openCommands() {\n    customDialog.customDialog(htmlTemplate, CommandsDialogController, {panelClass: \"test\"}).subscribe();\n}\n\nfunction CommandsDialogController(instance) {\n    let vm = instance;\n    \n    vm.entityId = entityId.id;\n\n    vm.cancel = function() {\n        vm.dialogRef.close(null);\n    };\n}\n",
                 "customResources": [
                   {
-                    "url": {
-                      "entityType": "TB_RESOURCE",
-                      "id": "${RESOURCE:gateway-management-extension.js}"
-                    },
+                    "url": "tb-resource;/api/resource/js_module/system/gateway-management-extension.js",
                     "isModule": true
                   }
                 ],
