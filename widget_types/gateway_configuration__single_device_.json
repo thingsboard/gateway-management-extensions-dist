@@ -10,7 +10,10 @@
     "sizeY": 9,
     "resources": [
       {
-        "url": "tb-resource;/api/resource/js_module/system/gateway-management-extension.js",
+        "url": {
+          "entityType": "TB_RESOURCE",
+          "id": "${RESOURCE:gateway-management-extension.js}"
+        },
         "isModule": true
       }
     ],
