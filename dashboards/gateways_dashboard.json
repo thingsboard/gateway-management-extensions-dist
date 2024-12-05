@@ -7154,7 +7154,7 @@
         "id": "b5ffefb2-9fb5-cf22-bba2-dba9a98891db"
       },
       "bc199c75-00da-ca8a-dd0d-16da97a9fa53": {
-        "typeFullFqn": "system.load_gateway_resource2",
+        "typeFullFqn": "gateway_widgets.gateway_status",
         "type": "latest",
         "sizeX": 7.5,
         "sizeY": 3,
@@ -8443,7 +8443,7 @@
         "id": "56274c38-33fc-fe9d-aa39-ff3e1215276b"
       },
       "38063fe5-1bd8-695b-a40b-92c1aed19831": {
-        "typeFullFqn": "system.load_gateway_resource2",
+        "typeFullFqn": "gateway_widgets.gateway_status",
         "type": "latest",
         "sizeX": 7.5,
         "sizeY": 3,
