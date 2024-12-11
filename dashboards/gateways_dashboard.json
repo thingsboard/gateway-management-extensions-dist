@@ -2366,7 +2366,7 @@
           "widgetCss": "",
           "pageSize": 1024,
           "noDataDisplayMessage": "",
-          "enableDataExport": false,
+          "enableDataExport": true,
           "borderRadius": "4px"
         },
         "row": 0,
@@ -5374,7 +5374,7 @@
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextPattern": "let buttonsHtml = \"\" \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    let disabled = false;\n    if (index == 2) {\n        disabled = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\n    } else if (index == 4) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.remoteShell;\n    }\n    buttonsHtml += `<button mat-raised-button disabled=${disabled} color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "markdownTextFunction": "let buttonsHtml = \"\";\nconst buttonName = \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    buttonsHtml += `<button mat-stroked-button disabled=\"false\" color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
+            "markdownTextFunction": "const states = ['storage_statistics', 'machine_statistics'];\nconst currentState = ctx.stateController.getStateId();\nlet buttonsHtml = \"\";\nconst buttonName = \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    buttonsHtml += `<button mat-stroked-button [class.tb-primary-fill]=\"${states[index] === currentState}\" disabled=\"false\" color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
             "applyDefaultMarkdownStyle": false,
             "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: start;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\r\n}"
           },
@@ -5429,7 +5429,8 @@
           "widgetCss": "",
           "pageSize": 1024,
           "noDataDisplayMessage": "",
-          "margin": "16px 16px 0 0"
+          "margin": "16px 16px 0 0",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -5505,7 +5506,8 @@
           "showLegend": false,
           "widgetCss": "",
           "pageSize": 1024,
-          "noDataDisplayMessage": ""
+          "noDataDisplayMessage": "",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -5756,7 +5758,8 @@
             "displayTypePrefix": false
           },
           "titleColor": "rgba(0, 0, 0, 0.87)",
-          "borderRadius": "5px"
+          "borderRadius": "5px",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -6007,7 +6010,8 @@
             "displayTypePrefix": false
           },
           "titleColor": "rgba(0, 0, 0, 0.87)",
-          "borderRadius": "5px"
+          "borderRadius": "5px",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -6536,7 +6540,8 @@
           },
           "margin": "0px",
           "borderRadius": "5px",
-          "iconSize": "0px"
+          "iconSize": "0px",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -6719,7 +6724,7 @@
                   "units": null
                 },
                 {
-                  "name": "serviceStats",
+                  "name": "machineStats",
                   "type": "timeseries",
                   "label": "{i18n:gateway.statistics.messages-sent-to-platform}",
                   "color": "#048AD3",
@@ -6797,7 +6802,7 @@
                   "aggregationType": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.storageMsgCount ?? 0;",
+                  "postFuncBody": "return JSON.parse(value)?.msgsSentToPlatform ?? 0;",
                   "units": null
                 }
               ],
@@ -7147,14 +7152,15 @@
           },
           "margin": "0px",
           "borderRadius": "5px",
-          "iconSize": "0px"
+          "iconSize": "0px",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
         "id": "b5ffefb2-9fb5-cf22-bba2-dba9a98891db"
       },
       "bc199c75-00da-ca8a-dd0d-16da97a9fa53": {
-        "typeFullFqn": "gateway_widgets.gateway_status",
+        "typeFullFqn": "system.gateway_widgets.gateway_status",
         "type": "latest",
         "sizeX": 7.5,
         "sizeY": 3,
@@ -7246,7 +7252,8 @@
           "widgetStyle": {},
           "widgetCss": "",
           "pageSize": 1024,
-          "noDataDisplayMessage": ""
+          "noDataDisplayMessage": "",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -7828,7 +7835,8 @@
           },
           "margin": "0px",
           "borderRadius": "5px",
-          "iconSize": "0px"
+          "iconSize": "0px",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -7970,7 +7978,8 @@
           "borderRadius": "5px",
           "widgetCss": "",
           "pageSize": 1024,
-          "noDataDisplayMessage": ""
+          "noDataDisplayMessage": "",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -8106,7 +8115,8 @@
           "borderRadius": "5px",
           "widgetCss": "",
           "pageSize": 1024,
-          "noDataDisplayMessage": ""
+          "noDataDisplayMessage": "",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -8242,7 +8252,8 @@
           "borderRadius": "5px",
           "widgetCss": "",
           "pageSize": 1024,
-          "noDataDisplayMessage": ""
+          "noDataDisplayMessage": "",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -8318,7 +8329,8 @@
           "showLegend": false,
           "widgetCss": "",
           "pageSize": 1024,
-          "noDataDisplayMessage": ""
+          "noDataDisplayMessage": "",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -8381,7 +8393,7 @@
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextPattern": "let buttonsHtml = \"\" \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    let disabled = false;\n    if (index == 2) {\n        disabled = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\n    } else if (index == 4) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.remoteShell;\n    }\n    buttonsHtml += `<button mat-raised-button disabled=${disabled} color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "markdownTextFunction": "let buttonsHtml = \"\";\nconst buttonName = \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    buttonsHtml += `<button mat-stroked-button disabled=\"false\" color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
+            "markdownTextFunction": "const states = ['storage_statistics', 'machine_statistics'];\nconst currentState = ctx.stateController.getStateId();\nlet buttonsHtml = \"\";\nconst buttonName = \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    buttonsHtml += `<button mat-stroked-button [class.tb-primary-fill]=\"${states[index] === currentState}\" disabled=\"false\" color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
             "applyDefaultMarkdownStyle": false,
             "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: start;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\r\n}"
           },
@@ -8436,14 +8448,15 @@
           "widgetCss": "",
           "pageSize": 1024,
           "noDataDisplayMessage": "",
-          "margin": "16px 16px 0 0"
+          "margin": "16px 16px 0 0",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
         "id": "56274c38-33fc-fe9d-aa39-ff3e1215276b"
       },
       "38063fe5-1bd8-695b-a40b-92c1aed19831": {
-        "typeFullFqn": "gateway_widgets.gateway_status",
+        "typeFullFqn": "system.gateway_widgets.gateway_status",
         "type": "latest",
         "sizeX": 7.5,
         "sizeY": 3,
@@ -8535,7 +8548,8 @@
           "widgetStyle": {},
           "widgetCss": "",
           "pageSize": 1024,
-          "noDataDisplayMessage": ""
+          "noDataDisplayMessage": "",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -9343,24 +9357,31 @@
             "widgets": {
               "b4194e1e-97af-ed0b-a6a4-70011c71c579": {
                 "sizeX": 5,
-                "sizeY": 16,
+                "sizeY": 12,
                 "resizable": true,
                 "row": 0,
-                "col": 26,
-                "mobileOrder": 1,
-                "mobileHeight": 5
+                "col": 25,
+                "mobileOrder": 0,
+                "mobileHeight": 3
               },
               "3a005e49-327c-beaa-8d19-c36b833001f0": {
-                "sizeX": 26,
-                "sizeY": 18,
+                "sizeX": 25,
+                "sizeY": 14,
                 "row": 0,
-                "col": 0
+                "col": 0,
+                "resizable": true,
+                "mobileOrder": 1,
+                "mobileHeight": 12
               },
               "bc199c75-00da-ca8a-dd0d-16da97a9fa53": {
                 "sizeX": 5,
                 "sizeY": 2,
-                "row": 16,
-                "col": 26
+                "row": 12,
+                "col": 25,
+                "resizable": true,
+                "preserveAspectRatio": false,
+                "mobileOrder": 3,
+                "mobileHeight": 2
               }
             },
             "gridSettings": {
@@ -9389,22 +9410,30 @@
             "widgets": {
               "867613d5-9440-fac1-9156-cd8773df5c97": {
                 "sizeX": 25,
-                "sizeY": 17,
+                "sizeY": 14,
                 "row": 0,
-                "col": 0
+                "col": 0,
+                "resizable": true,
+                "mobileOrder": 1,
+                "mobileHeight": 12
               },
               "56274c38-33fc-fe9d-aa39-ff3e1215276b": {
                 "sizeX": 5,
-                "sizeY": 15,
+                "sizeY": 12,
                 "resizable": true,
                 "row": 0,
-                "col": 25
+                "col": 25,
+                "mobileOrder": 0,
+                "mobileHeight": 3
               },
               "38063fe5-1bd8-695b-a40b-92c1aed19831": {
                 "sizeX": 5,
                 "sizeY": 2,
-                "row": 15,
-                "col": 25
+                "row": 12,
+                "col": 25,
+                "resizable": true,
+                "mobileOrder": 3,
+                "mobileHeight": 1
               }
             },
             "gridSettings": {
