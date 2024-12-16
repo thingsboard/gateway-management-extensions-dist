@@ -47,7 +47,7 @@
           "color": "rgba(0, 0, 0, 0.87)",
           "padding": "4px",
           "settings": {
-            "entitiesTitle": "Gateways list",
+            "entitiesTitle": "Gateway list",
             "enableSearch": true,
             "enableSelectColumnDisplay": false,
             "enableStickyHeader": true,
@@ -62,7 +62,7 @@
             "defaultSortOrder": "entityName",
             "useRowStyleFunction": false
           },
-          "title": "Gateways list",
+          "title": "Gateway list",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": {
@@ -207,7 +207,7 @@
                 "id": "ae2e5995-505f-a241-5fb2-6cbaf08b1b55"
               },
               {
-                "name": "Gateway configuration",
+                "name": "General configuration",
                 "icon": "settings",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -2366,7 +2366,7 @@
           "widgetCss": "",
           "pageSize": 1024,
           "noDataDisplayMessage": "",
-          "enableDataExport": true,
+          "enableDataExport": false,
           "borderRadius": "4px"
         },
         "row": 0,
@@ -5537,7 +5537,7 @@
                   "aggregationType": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.storageMsgCount ?? 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.storageMsgCount ?? 0) : 0;"
                 }
               ],
               "alarmFilterConfig": {
@@ -5578,7 +5578,7 @@
                   "aggregationType": "NONE",
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.storageMsgCount ?? 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.storageMsgCount ?? 0) : 0;"
                 }
               ]
             }
@@ -5789,7 +5789,7 @@
                   "aggregationType": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.storageMsgPulled ?? value;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.storageMsgPulled ?? 0) : 0;"
                 }
               ],
               "alarmFilterConfig": {
@@ -5830,7 +5830,7 @@
                   "aggregationType": "NONE",
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.storageMsgPulled ?? value;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.storageMsgPulled ?? 0) : 0;"
                 }
               ]
             }
@@ -6109,7 +6109,7 @@
                   "aggregationType": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.platformAttrProduced ?? 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.platformAttrProduced ?? 0) : 0;"
                 },
                 {
                   "name": "serviceStats",
@@ -6190,7 +6190,7 @@
                   "aggregationType": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.platformTsProduced ?? 0;",
+                  "postFuncBody": "return value ? (JSON.parse(value)?.platformTsProduced ?? 0) : 0;",
                   "units": null
                 }
               ],
@@ -6639,7 +6639,7 @@
                   "aggregationType": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.storageMsgPulled ?? 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.storageMsgPulled ?? 0) : 0;"
                 },
                 {
                   "name": "serviceStats",
@@ -6720,7 +6720,7 @@
                   "aggregationType": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.platformMsgPushed ?? 0;",
+                  "postFuncBody": "return value ? (JSON.parse(value)?.platformMsgPushed ?? 0) : 0;",
                   "units": null
                 },
                 {
@@ -6802,7 +6802,7 @@
                   "aggregationType": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.msgsSentToPlatform ?? 0;",
+                  "postFuncBody": "return value ? (JSON.parse(value)?.msgsSentToPlatform ?? 0) : 0;",
                   "units": null
                 }
               ],
@@ -7106,7 +7106,7 @@
             },
             "tooltipLabelColor": "rgba(0, 0, 0, 0.76)"
           },
-          "title": "{i18n:gateway.statistics.machine-resources}",
+          "title": "{i18n:gateway.statistics.messages}",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": null,
@@ -7351,7 +7351,7 @@
                   "aggregationType": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.gwProcessCpuUsage ?? 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.gwProcessCpuUsage ?? 0) : 0;"
                 },
                 {
                   "name": "machineStats",
@@ -7433,7 +7433,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.gwMemory ?? 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.gwMemory ?? 0) : 0;"
                 },
                 {
                   "name": "machineStats",
@@ -7515,7 +7515,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.diskUsage ?? 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.diskUsage ?? 0) : 0;"
                 }
               ],
               "alarmFilterConfig": {
@@ -7857,20 +7857,6 @@
                 {
                   "name": "machineStats",
                   "type": "timeseries",
-                  "label": "totalCpuUsage",
-                  "color": "#2196f3",
-                  "settings": {},
-                  "_hash": 0.028806290924302758,
-                  "aggregationType": "NONE",
-                  "units": null,
-                  "decimals": null,
-                  "funcBody": null,
-                  "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.totalCpuUsage ?? value;"
-                },
-                {
-                  "name": "machineStats",
-                  "type": "timeseries",
                   "label": "gwProcessCpuUsage",
                   "color": "#4caf50",
                   "settings": {},
@@ -7880,7 +7866,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.gwProcessCpuUsage ?? value;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.gwProcessCpuUsage ?? 0) : 0;"
                 },
                 {
                   "name": "machineStats",
@@ -7894,7 +7880,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "const usage = JSON.parse(value)?.gwProcessCpuUsage ?? value;\nlet status = 'status-ok';\nif (usage > 85) {\n    status = 'status-critical';\n} else if (usage > 75) {\n    status = 'status-warn';\n}\nreturn status;"
+                  "postFuncBody": "const usage = value ? (JSON.parse(value)?.gwProcessCpuUsage ?? 0) : 0;\nlet status = 'status-ok';\nif (usage > 85) {\n    status = 'status-critical';\n} else if (usage > 75) {\n    status = 'status-warn';\n}\nreturn status;"
                 },
                 {
                   "name": "machineStats",
@@ -7908,7 +7894,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "const usage = JSON.parse(value)?.gwProcessCpuUsage ?? value;\nlet text = '';\nif (usage > 85) {\n    text = '{{ \\'widgets.system-info.cpu-critical-text\\' | translate }}';\n} else if (usage > 75) {\n    text = '{{ \\'widgets.system-info.cpu-warning-text\\' | translate }}';\n}\nreturn text;"
+                  "postFuncBody": "const usage = value ? (JSON.parse(value)?.gwProcessCpuUsage ?? 0) : 0;\nlet text = '';\nif (usage > 85) {\n    text = '{{ \\'widgets.system-info.cpu-critical-text\\' | translate }}';\n} else if (usage > 75) {\n    text = '{{ \\'widgets.system-info.cpu-warning-text\\' | translate }}';\n}\nreturn text;"
                 }
               ],
               "alarmFilterConfig": {
@@ -8009,7 +7995,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.gwMemory ?? 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.gwMemory ?? 0) : 0;"
                 },
                 {
                   "name": "machineStats",
@@ -8023,7 +8009,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "const usage = JSON.parse(value)?.gwMemory ?? 0;\nlet status = 'status-ok';\nif (usage > 85) {\n    status = 'status-critical';\n} else if (usage > 75) {\n    status = 'status-warn';\n}\nreturn status;"
+                  "postFuncBody": "const usage = value ? (JSON.parse(value)?.gwMemory ?? 0) : 0;\nlet status = 'status-ok';\nif (usage > 85) {\n    status = 'status-critical';\n} else if (usage > 75) {\n    status = 'status-warn';\n}\nreturn status;"
                 },
                 {
                   "name": "machineStats",
@@ -8037,7 +8023,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "const usage = JSON.parse(value)?.gwMemory ?? 0;\nlet text = '';\nif (usage > 85) {\n    text = '{{ \\'widgets.system-info.ram-critical-text\\' | translate }}';\n} else if (usage > 75) {\n    text = '{{ \\'widgets.system-info.ram-warning-text\\' | translate }}';\n}\nreturn text;"
+                  "postFuncBody": "const usage = value ? (JSON.parse(value)?.gwMemory ?? 0) : 0;\nlet text = '';\nif (usage > 85) {\n    text = '{{ \\'widgets.system-info.ram-critical-text\\' | translate }}';\n} else if (usage > 75) {\n    text = '{{ \\'widgets.system-info.ram-warning-text\\' | translate }}';\n}\nreturn text;"
                 },
                 {
                   "name": "totalMemory",
@@ -8045,7 +8031,13 @@
                   "label": "totalMemory",
                   "color": "#ffc107",
                   "settings": {},
-                  "_hash": 0.4893025210001585
+                  "_hash": 0.4893025210001585,
+                  "aggregationType": null,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": true,
+                  "postFuncBody": "return value || '0G';"
                 }
               ],
               "alarmFilterConfig": {
@@ -8146,7 +8138,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return JSON.parse(value)?.diskUsage ?? 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.diskUsage ?? 0) : 0;"
                 },
                 {
                   "name": "machineStats",
@@ -8160,7 +8152,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "const usage = JSON.parse(value)?.diskUsage ?? 0;\nlet status = 'status-ok';\nif (usage > 85) {\n    status = 'status-critical';\n} else if (usage > 75) {\n    status = 'status-warn';\n}\nreturn status;"
+                  "postFuncBody": "const usage = value ? (JSON.parse(value)?.diskUsage ?? 0) : 0;\nlet status = 'status-ok';\nif (usage > 85) {\n    status = 'status-critical';\n} else if (usage > 75) {\n    status = 'status-warn';\n}\nreturn status;"
                 },
                 {
                   "name": "machineStats",
@@ -8174,7 +8166,7 @@
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "const usage = JSON.parse(value)?.diskUsage ?? 0;\nlet text = '';\nif (usage > 85) {\n    text = '{{ \\'widgets.system-info.disk-critical-text\\' | translate }}';\n} else if (usage > 75) {\n    text = '{{ \\'widgets.system-info.disk-warning-text\\' | translate }}';\n}\nreturn text;"
+                  "postFuncBody": "const usage = value ? (JSON.parse(value)?.diskUsage ?? 0) : 0;\nlet text = '';\nif (usage > 85) {\n    text = '{{ \\'widgets.system-info.disk-critical-text\\' | translate }}';\n} else if (usage > 75) {\n    text = '{{ \\'widgets.system-info.disk-warning-text\\' | translate }}';\n}\nreturn text;"
                 },
                 {
                   "name": "totalDisk",
@@ -8182,7 +8174,13 @@
                   "label": "totalDisk",
                   "color": "#ffc107",
                   "settings": {},
-                  "_hash": 0.6337011250870808
+                  "_hash": 0.6337011250870808,
+                  "aggregationType": null,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": true,
+                  "postFuncBody": "return value || '0G';"
                 }
               ],
               "alarmFilterConfig": {
