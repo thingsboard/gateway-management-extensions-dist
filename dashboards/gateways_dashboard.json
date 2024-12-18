@@ -1797,11 +1797,16 @@
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
-                "type": "openDashboardState",
-                "targetDashboardStateId": "storage_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
+                "type": "customPretty",
+                "customHtml": "",
+                "customCss": "",
+                "customFunction": "widgetContext.stateController.openState('storage_statistics', widgetContext.stateController.getStateParams());",
+                "customResources": [
+                  {
+                    "url": "tb-resource;/api/resource/js_module/system/gateway-management-extension.js",
+                    "isModule": true
+                  }
+                ],
                 "openInSeparateDialog": false,
                 "openInPopover": false,
                 "id": "425ba0d8-8e26-18a5-881d-bebe27fb2a7a"
@@ -5780,7 +5785,7 @@
                 {
                   "name": "serviceStats",
                   "type": "timeseries",
-                  "label": "{i18n:gateway.statistics.messages-received-from-platform}",
+                  "label": "{i18n:gateway.statistics.messages-from-platform}",
                   "color": "rgba(0, 0, 0, 0.87)",
                   "settings": {},
                   "_hash": 0.6231145484349594,
@@ -5801,7 +5806,7 @@
                 {
                   "name": "serviceStats",
                   "type": "timeseries",
-                  "label": "{i18n:gateway.statistics.messages-received-from-platform}",
+                  "label": "{i18n:gateway.statistics.messages-from-platform}",
                   "color": "#4caf50",
                   "settings": {
                     "position": "center",
@@ -5963,7 +5968,7 @@
             "autoScale": true,
             "padding": "18px"
           },
-          "title": "{i18n:gateway.statistics.messages-received-from-platform}",
+          "title": "{i18n:gateway.statistics.messages-from-platform}",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": {
@@ -9359,7 +9364,7 @@
                 "resizable": true,
                 "row": 0,
                 "col": 25,
-                "mobileOrder": 0,
+                "mobileOrder": 1,
                 "mobileHeight": 3
               },
               "3a005e49-327c-beaa-8d19-c36b833001f0": {
@@ -9368,8 +9373,8 @@
                 "row": 0,
                 "col": 0,
                 "resizable": true,
-                "mobileOrder": 1,
-                "mobileHeight": 12
+                "mobileOrder": 2,
+                "mobileHeight": null
               },
               "bc199c75-00da-ca8a-dd0d-16da97a9fa53": {
                 "sizeX": 5,
@@ -9394,7 +9399,7 @@
               "autoFillHeight": true,
               "rowHeight": 70,
               "backgroundImageUrl": null,
-              "mobileAutoFillHeight": true,
+              "mobileAutoFillHeight": false,
               "mobileRowHeight": 70
             }
           }
@@ -9412,8 +9417,8 @@
                 "row": 0,
                 "col": 0,
                 "resizable": true,
-                "mobileOrder": 1,
-                "mobileHeight": 12
+                "mobileOrder": 2,
+                "mobileHeight": null
               },
               "56274c38-33fc-fe9d-aa39-ff3e1215276b": {
                 "sizeX": 5,
@@ -9421,7 +9426,7 @@
                 "resizable": true,
                 "row": 0,
                 "col": 25,
-                "mobileOrder": 0,
+                "mobileOrder": 1,
                 "mobileHeight": 3
               },
               "38063fe5-1bd8-695b-a40b-92c1aed19831": {
@@ -9431,7 +9436,7 @@
                 "col": 25,
                 "resizable": true,
                 "mobileOrder": 3,
-                "mobileHeight": 1
+                "mobileHeight": 2
               }
             },
             "gridSettings": {
@@ -9446,7 +9451,7 @@
               "autoFillHeight": true,
               "rowHeight": 70,
               "backgroundImageUrl": null,
-              "mobileAutoFillHeight": true,
+              "mobileAutoFillHeight": false,
               "mobileRowHeight": 70
             }
           }
@@ -9461,34 +9466,38 @@
               "5f26fe0d-4417-31c6-0a98-8760cda909c5": {
                 "sizeX": 6,
                 "sizeY": 3,
-                "mobileHeight": null,
+                "mobileHeight": 3,
                 "resizable": true,
                 "row": 0,
-                "col": 0
+                "col": 0,
+                "mobileOrder": 1
               },
               "dc060491-215c-3e63-edc2-66d52888735d": {
                 "sizeX": 6,
                 "sizeY": 3,
-                "mobileHeight": null,
+                "mobileHeight": 3,
                 "resizable": true,
                 "row": 3,
-                "col": 0
+                "col": 0,
+                "mobileOrder": 2
               },
               "b37b2916-acd7-353b-6fbc-ceddac152ee8": {
                 "sizeX": 15,
                 "sizeY": 6,
-                "mobileHeight": null,
+                "mobileHeight": 6,
                 "resizable": true,
                 "row": 0,
-                "col": 6
+                "col": 6,
+                "mobileOrder": 3
               },
               "b5ffefb2-9fb5-cf22-bba2-dba9a98891db": {
                 "sizeX": 21,
                 "sizeY": 7,
-                "mobileHeight": null,
+                "mobileHeight": 6,
                 "resizable": true,
                 "row": 6,
-                "col": 0
+                "col": 0,
+                "mobileOrder": 4
               }
             },
             "gridSettings": {
@@ -9518,31 +9527,38 @@
               "7543e668-35b7-bb97-2f14-163399f8d038": {
                 "sizeX": 21,
                 "sizeY": 9,
-                "mobileHeight": null,
+                "mobileHeight": 6,
                 "resizable": true,
                 "row": 3,
-                "col": 0
+                "col": 0,
+                "mobileOrder": 4
               },
               "7f3ebf9f-d967-44fe-fbe4-4667a2abcf88": {
                 "sizeX": 7,
                 "sizeY": 3,
                 "resizable": true,
                 "row": 0,
-                "col": 0
+                "col": 0,
+                "mobileOrder": 1,
+                "mobileHeight": 2
               },
               "ea75a492-d149-9a53-b45f-840a0ce42a40": {
                 "sizeX": 7,
                 "sizeY": 3,
                 "resizable": true,
                 "row": 0,
-                "col": 7
+                "col": 7,
+                "mobileOrder": 2,
+                "mobileHeight": 2
               },
               "13b57ab5-e5ed-701c-4c67-5bb1198e9a53": {
                 "sizeX": 7,
                 "sizeY": 3,
                 "resizable": true,
                 "row": 0,
-                "col": 14
+                "col": 14,
+                "mobileOrder": 3,
+                "mobileHeight": 2
               }
             },
             "gridSettings": {
