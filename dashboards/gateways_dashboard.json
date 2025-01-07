@@ -8843,7 +8843,7 @@
               "timewindowMs": 60000
             }
           },
-          "showTitle": true,
+          "showTitle": false,
           "backgroundColor": "#fff",
           "color": "rgba(0, 0, 0, 0.87)",
           "padding": "8px",
@@ -8875,7 +8875,8 @@
             },
             "decimals": 1,
             "stack": false,
-            "tooltipIndividual": false
+            "tooltipIndividual": false,
+            "showLegend": false
           },
           "title": "Gateway custom statistics ",
           "dropShadow": true,
@@ -9933,21 +9934,27 @@
                 "preserveAspectRatio": false,
                 "resizable": true,
                 "row": 12,
-                "col": 20
+                "col": 20,
+                "mobileOrder": 3,
+                "mobileHeight": 2
               },
               "3a1f2fe6-7da9-15aa-777d-383e0ac01520": {
                 "sizeX": 4,
                 "sizeY": 12,
                 "resizable": true,
                 "row": 0,
-                "col": 20
+                "col": 20,
+                "mobileOrder": 1,
+                "mobileHeight": 3
               },
               "7a34986a-ec7f-4c64-84f9-338cf1626722": {
                 "sizeX": 20,
                 "sizeY": 14,
                 "mobileHeight": null,
                 "row": 0,
-                "col": 0
+                "col": 0,
+                "resizable": true,
+                "mobileOrder": 2
               }
             },
             "gridSettings": {
