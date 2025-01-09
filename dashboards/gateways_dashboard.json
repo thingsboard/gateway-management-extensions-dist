@@ -8895,7 +8895,8 @@
           "widgetStyle": {},
           "widgetCss": "",
           "pageSize": 1024,
-          "noDataDisplayMessage": ""
+          "noDataDisplayMessage": "",
+          "enableDataExport": false
         },
         "row": 0,
         "col": 0,
@@ -10695,11 +10696,11 @@
       "hideAggregation": false,
       "hideAggInterval": false,
       "hideTimezone": false,
-      "selectedTab": 1,
+      "selectedTab": 0,
       "realtime": {
         "realtimeType": 0,
-        "interval": 1000,
-        "timewindowMs": 60000,
+        "interval": 120000,
+        "timewindowMs": 900000,
         "quickInterval": "CURRENT_DAY",
         "hideInterval": false,
         "hideLastInterval": false,
