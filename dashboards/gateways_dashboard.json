@@ -5414,7 +5414,7 @@
                   "aggregationType": "NONE",
                   "funcBody": null,
                   "usePostProcessing": true,
-                  "postFuncBody": "return value ? (JSON.parse(value)?.storageMsgPulled ?? 0) : 0;"
+                  "postFuncBody": "return value ? (JSON.parse(value)?.msgsReceivedFromPlatform ?? 0) : 0;"
                 }
               ]
             }
