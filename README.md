@@ -22,6 +22,7 @@ The project offers distribution files for the [ThingsBoard Gateway Management Ex
   - **Gateway General Configuration**: `gateway_general_configuration.json`
   - **Gateway Logs**: `gateway_logs.json`
   - **Service RPC**: `service_rpc.json`
+  - **Gateway Markdown/HTML Card**: `gateway_markdown_html_card.json`
 
 ### 4. Update the Gateways Dashboard
 - Upload or update the Gateways Dashboard using the `gateways_dashboard.json` dashboard file.

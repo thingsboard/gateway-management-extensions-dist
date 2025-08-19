@@ -650,9 +650,9 @@
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextPattern": "# Markdown/HTML card \\n - **Current entity**: **${entityName}**. \\n - **Current value**: **${Random}**.",
-            "markdownTextFunction": "var blockData = '';\nvar connectorsIndex = ctx.actionsApi.getActionDescriptors('elementClick').findIndex(action => action.name == \"Connectors\");\nvar logsIndex = ctx.actionsApi.getActionDescriptors('elementClick').findIndex(action => action.name == \"Logs\");\nfunction generateMatHeader(index) {\n    if (index !== undefined && index > -1) {\n         return `<mat-card-header class='tb-home-widget-link' (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\">`\n    } else {\n       return \"<mat-card-header>\"\n    }\n}\nfunction createDataBlock(value, label, dividerStyle, mobile, index) {\n    blockData += `\n        <mat-card style=\"flex-grow: 1; width: ${mobile ? '100%' : 'auto'}; min-height: ${mobile ? 'auto' : '57px'}\" class=\"${dividerStyle}\">\n            <div class=\"divider\"></div>\n            <mat-divider vertical style=\"height:100%\"></mat-divider>\n            ${generateMatHeader(index)}\n                <mat-card-subtitle>${label}</mat-card-subtitle>\n            </mat-card-header>\n            <mat-card-content> ${value}</mat-card-content>\n        </mat-card>`;\n}\ncreateDataBlock(data[0].Status, \"Status\", data[0].Status === \"Active\" ? 'divider-green' : 'divider-red');\ncreateDataBlock(ctx.sanitizer.sanitize(1, data[0].Name), \"Gateway Name\", '', ctx.isMobile);\nif (data[0].Version) {\n    createDataBlock(data[0].Version, \"Gateway Version\", '');\n}\ncreateDataBlock(data[0].Type, \"Gateway Type\", '');\ncreateDataBlock(\n    `<span style=\"color:rgb(25,128,56)\">${(data[1] ? data[1].count : 0)} </span>`\n    + \" | \" +\n    `<span style=\"color:rgb(203,37,48)\">${(data[2] ? data[2][\"count 2\"] : 0)} </span>`\n    , \"Devices <span class='tb-hint' style='padding-left: 0'>(Active | Inactive)</span>\", '');\ncreateDataBlock(\n    `<span style=\"color:rgb(25,128,56)\">${(data[0].active_connectors ? JSON.parse(data[0].active_connectors).length : 0)} </span>`\n    + \" | \" +\n    `<span style=\"color:rgb(203,37,48)\">${(data[0].inactive_connectors ? JSON.parse(data[0].inactive_connectors).length : 0)} </span>`\n    , \"Connectors <span class='tb-hint' style='padding-left: 0'>(Enabled | Disabled)</span>\", '', '', connectorsIndex);\ncreateDataBlock(data[0].ALL_ERRORS_COUNT || 0, \"Errors\", (data[0].ALL_ERRORS_COUNT || 0) === 0 ? 'divider-green' : 'divider-red', '', logsIndex);\nreturn `<div class=\"flex flex-row flex-wrap gap-2 cards-container\">${blockData}</div>`;",
+            "markdownTextFunction": "var blockData = '';\n\nfunction createDataBlock(value, label, dividerStyle, mobile, id) {\n    blockData += `\n        <mat-card style=\"flex-grow: 1; width: ${mobile ? '100%' : 'auto'}; min-height: ${mobile ? 'auto' : '57px'}\" class=\"${dividerStyle}\">\n            <div class=\"divider\"></div>\n            <mat-divider vertical style=\"height:100%\"></mat-divider>\n            ${id ? `<mat-card-header class='tb-home-widget-link' id=\"${id}\">` : `<mat-card-header>`}\n                <mat-card-subtitle>${label}</mat-card-subtitle>\n            </mat-card-header>\n            <mat-card-content> ${value}</mat-card-content>\n        </mat-card>`;\n}\n\ncreateDataBlock(data[0].Status, \"{{ 'gateway.status-widget.status' | translate }}\", data[0].Status === \"Active\" ? 'divider-green' : 'divider-red');\ncreateDataBlock(ctx.sanitizer.sanitize(1, data[0].Name), \"{{ 'gateway.status-widget.gateway-name' | translate }}\", '', ctx.isMobile);\n\nif (data[0].Version) {\n    createDataBlock(data[0].Version, \"{{ 'gateway.status-widget.gateway-version' | translate }}\", '');\n}\n\ncreateDataBlock(data[0].Type, \"{{ 'gateway.status-widget.gateway-type' | translate }}\", '');\n\ncreateDataBlock(\n    `<span style=\"color:rgb(25,128,56)\">${(data[1] ? data[1].count : 0)} </span>`\n    + \" | \" +\n    `<span style=\"color:rgb(203,37,48)\">${(data[2] ? data[2][\"count 2\"] : 0)} </span>`\n    , \"{{ 'gateway.status-widget.devices' | translate }} <span class='tb-hint' style='padding-left: 0'>{{ 'gateway.status-widget.active-inactive' | translate }}</span>\", '');\n    \ncreateDataBlock(\n    `<span style=\"color:rgb(25,128,56)\">${(data[0].active_connectors ? JSON.parse(data[0].active_connectors).length : 0)} </span>`\n    + \" | \" +\n    `<span style=\"color:rgb(203,37,48)\">${(data[0].inactive_connectors ? JSON.parse(data[0].inactive_connectors).length : 0)} </span>`\n    , \"{{ 'gateway.status-widget.connectors' | translate }} <span class='tb-hint' style='padding-left: 0'>{{ 'gateway.status-widget.enabled-disabled' | translate }}</span>\", '', '', 'connectors');\n    \ncreateDataBlock(data[0].ALL_ERRORS_COUNT || 0, \"{{ 'gateway.status-widget.errors' | translate }}\", (data[0].ALL_ERRORS_COUNT || 0) === 0 ? 'divider-green' : 'divider-red', '', 'logs');\n\nreturn `<div class=\"flex flex-row flex-wrap gap-2 cards-container\">${blockData}</div>`;",
             "applyDefaultMarkdownStyle": false,
-            "markdownCss": ".divider {\n    position: absolute;\n    width: 3px;\n    top: 8px;\n    border-radius: 2px;\n    bottom: 8px;\n    border: 1px solid rgba(31, 70, 144, 1);\n    background-color: rgba(31, 70, 144, 1);\n    left: 10px;\n}\n.divider-green .divider {\n    border: 1px solid rgb(25,128,56);\n    background-color: rgb(25,128,56);\n}\n\n.divider-green .mat-mdc-card-content {\n    color: rgb(25,128,56);\n}\n\n.divider-red .divider {\n    border: 1px solid rgb(203,37,48);\n    background-color: rgb(203,37,48);\n}\n\n.divider-red .mat-mdc-card-content {\n    color: rgb(203,37,48);\n}\n\n.mdc-card {\n    position: relative;\n    padding-left: 10px;\n    margin-bottom: 1px;\n}\n\n.mat-mdc-card-subtitle {\n    font-weight: 400;\n    font-size: 12px;\n}\n\n.mat-mdc-card-header {\n    padding: 8px 16px 0;\n}\n\n.mat-mdc-card-content:last-child {\n    padding-bottom: 8px;\n    font-size: 16px;\n}\n\n.cards-container {\n    height: calc(100% - 1px);\n    justify-content: stretch;\n    align-items: center;\n    margin-bottom: 1px;\n}\n\n::ng-deep.tb-home-widget-link > div {\n    flex-grow: 1;\n    cursor: pointer;\n}\n\n .tb-home-widget-link {\n     width: 100%;\n }\n\n .tb-home-widget-link:hover::after{\n     color: inherit;\n }\n \n .tb-home-widget-link::after{\n    content: 'arrow_forward';\n    display: inline-block;\n    transform: rotate(315deg);\n    font-family: 'Material Icons';\n    font-weight: normal;\n    font-style: normal;\n    font-size: 18px;\n    color: rgba(0, 0, 0, 0.12);\n    vertical-align: bottom;\n    margin-left: 6px;\n}"
+            "markdownCss": ".divider {\n    position: absolute;\n    width: 3px;\n    top: 8px;\n    border-radius: 2px;\n    bottom: 8px;\n    border: 1px solid rgba(31, 70, 144, 1);\n    background-color: rgba(31, 70, 144, 1);\n    left: 10px;\n}\n.divider-green .divider {\n    border: 1px solid rgb(25,128,56);\n    background-color: rgb(25,128,56);\n}\n\n.divider-green .mat-mdc-card-content {\n    color: rgb(25,128,56);\n}\n\n.divider-red .divider {\n    border: 1px solid rgb(203,37,48);\n    background-color: rgb(203,37,48);\n}\n\n.divider-red .mat-mdc-card-content {\n    color: rgb(203,37,48);\n}\n\n.mdc-card {\n    position: relative;\n    padding-left: 10px;\n    margin-bottom: 1px;\n}\n\n.mat-mdc-card-subtitle {\n    font-weight: 400;\n    font-size: 12px;\n}\n\n.mat-mdc-card-header {\n    padding: 8px 16px 0;\n}\n\n.mat-mdc-card-content:last-child {\n    padding-bottom: 8px;\n    font-size: 16px;\n}\n\n.cards-container {\n    height: calc(100% - 1px);\n    justify-content: stretch;\n    align-items: center;\n    margin-bottom: 1px;\n}\n\n::ng-deep.tb-home-widget-link > div {\n    flex-grow: 1;\n}\n\n.tb-home-widget-link {\n    cursor: pointer;\n    width: 100%;\n}\n\n.tb-home-widget-link:hover::after{\n    color: inherit;\n}\n \n.tb-home-widget-link::after{\n    content: 'arrow_forward';\n    display: inline-block;\n    transform: rotate(315deg);\n    font-family: 'Material Icons';\n    font-weight: normal;\n    font-style: normal;\n    font-size: 18px;\n    color: rgba(0, 0, 0, 0.12);\n    vertical-align: bottom;\n    margin-left: 6px;\n}"
           },
           "title": "Connectors",
           "showTitleIcon": false,
@@ -678,7 +678,7 @@
           "actions": {
             "elementClick": [
               {
-                "name": "Connectors",
+                "name": "connectors",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -692,7 +692,7 @@
                 "id": "ee7216d8-ad7a-20db-1abc-2531e221f24c"
               },
               {
-                "name": "Logs",
+                "name": "logs",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -711,7 +711,7 @@
         "row": 0,
         "col": 0,
         "id": "79f59106-758f-c428-8b93-4341faea705d",
-        "typeFullFqn": "system.cards.markdown_card"
+        "typeFullFqn": "system.gateway_widgets.markdown_card"
       },
       "60dcf518-8fc3-3539-8ff8-ce94bda39f3a": {
         "type": "alarm",
@@ -872,9 +872,6 @@
             }
           ],
           "timewindow": {
-            "hideInterval": false,
-            "hideLastInterval": false,
-            "hideQuickInterval": false,
             "hideAggregation": false,
             "hideAggInterval": false,
             "hideTimezone": false,
@@ -1621,7 +1618,7 @@
           "padding": "8px",
           "settings": {
             "useMarkdownTextFunction": false,
-            "markdownTextPattern": "<div class=\"action-buttons-container\">\r\n  <button mat-raised-button color=\"primary\"\r\n     (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[0], ctx.datasources[0].entity.id)\"\r\n  >{{ 'gateway.launch-command' | translate }}\r\n </button>\r\n</div>",
+            "markdownTextPattern": "<div class=\"action-buttons-container\">\r\n  <button mat-raised-button color=\"primary\" id=\"launchCommand\">\r\n  {{ 'gateway.launch-command' | translate }}\r\n </button>\r\n</div>",
             "applyDefaultMarkdownStyle": false,
             "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: center;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\n}"
           },
@@ -1642,7 +1639,7 @@
           "actions": {
             "elementClick": [
               {
-                "name": "Launch command",
+                "name": "launchCommand",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -1671,7 +1668,7 @@
         "row": 0,
         "col": 0,
         "id": "fb9df382-6ef3-4aa6-bc13-8bf8e300ba19",
-        "typeFullFqn": "system.cards.markdown_card"
+        "typeFullFqn": "system.gateway_widgets.markdown_card"
       },
       "61d149e8-b249-5526-e5d7-6ad58413982e": {
         "type": "latest",
@@ -1742,7 +1739,7 @@
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextPattern": "# Markdown/HTML card \\n - **Current entity**: **${entityName}**. \\n - **Current value**: **${Random}**.",
-            "markdownTextFunction": "let buttonsHtml = \"\" \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    let disabled = false;\n    if (index == 2) {\n        disabled = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\n    } else if (index == 3) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = typeof conf.statistics?.enable === 'boolean' && !conf.statistics.enable;\n    } else if (index == 4) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.remoteShell;\n    }\n    buttonsHtml += `<button mat-raised-button disabled=${disabled} color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
+            "markdownTextFunction": "const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\nconst disabledLogsBtn = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\nconst disabledStatisticsBtn = typeof conf.statistics?.enable === 'boolean' && !conf.statistics.enable;\nconst disabledRemoteShellBtn = !conf.remoteShell;\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">\n  <button mat-raised-button disabled=\"false\" color=\"primary\" id=\"generalConfiguration\" class=\"w-full md:w-1/2\">{{ 'gateway.general-configuration-widget.general-configuration' | translate }}</button>\n  <button mat-raised-button disabled=\"false\" color=\"primary\" id=\"connectorsConfiguration\" class=\"w-full md:w-1/2\">{{ 'gateway.general-configuration-widget.connectors-configuration' | translate }}</button>\n  <button mat-raised-button disabled=\"${disabledLogsBtn}\" color=\"primary\" id=\"logs\" class=\"w-full md:w-1/2\">{{ 'gateway.general-configuration-widget.logs' | translate }}</button>\n  <button mat-raised-button disabled=\"${disabledStatisticsBtn}\" color=\"primary\" id=\"statistics\" class=\"w-full md:w-1/2\">{{ 'gateway.general-configuration-widget.statistics' | translate }}</button>\n  <button mat-raised-button disabled=\"${disabledRemoteShellBtn}\" color=\"primary\" id=\"remoteShell\" class=\"w-full md:w-1/2\">{{ 'gateway.general-configuration-widget.remote-shell' | translate }}</button>\n  <button mat-raised-button disabled=\"false\" color=\"primary\" id=\"rpc\" class=\"w-full md:w-1/2\">{{ 'gateway.general-configuration-widget.rpc' | translate }}</button>\n</div>`;\n",
             "applyDefaultMarkdownStyle": false,
             "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: start;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\n}"
           },
@@ -1763,7 +1760,7 @@
           "actions": {
             "elementClick": [
               {
-                "name": "General configuration",
+                "name": "generalConfiguration",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -1777,7 +1774,7 @@
                 "id": "337c767b-3217-d3d3-b955-7b0bd0858a1d"
               },
               {
-                "name": "Connectors configuration",
+                "name": "connectorsConfiguration",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -1791,7 +1788,7 @@
                 "id": "00469ea7-f4c4-e39d-a735-c74b6ba6a026"
               },
               {
-                "name": "Logs",
+                "name": "logs",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -1805,7 +1802,7 @@
                 "id": "d8607421-28b4-7c3b-949b-f69c3a46b461"
               },
               {
-                "name": "Statistics",
+                "name": "statistics",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -1824,7 +1821,7 @@
                 "id": "425ba0d8-8e26-18a5-881d-bebe27fb2a7a"
               },
               {
-                "name": "Remote Shell",
+                "name": "remoteShell",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -1838,7 +1835,7 @@
                 "id": "2c4c7dcc-009f-64eb-5f1b-a991df6d25a2"
               },
               {
-                "name": "RPC",
+                "name": "rpc",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
@@ -1862,7 +1859,7 @@
         "row": 0,
         "col": 0,
         "id": "61d149e8-b249-5526-e5d7-6ad58413982e",
-        "typeFullFqn": "system.cards.markdown_card"
+        "typeFullFqn": "system.gateway_widgets.markdown_card"
       },
       "3d661190-7463-ba61-6793-503c85af67ec": {
         "type": "latest",
@@ -1957,7 +1954,7 @@
         "row": 0,
         "col": 0,
         "id": "3d661190-7463-ba61-6793-503c85af67ec",
-        "typeFullFqn": "system.cards.markdown_card"
+        "typeFullFqn": "system.gateway_widgets.markdown_card"
       },
       "1615bd4e-c0a4-c32c-3706-3c83214cb8d7": {
         "type": "latest",
@@ -4903,7 +4900,7 @@
         "typeFullFqn": "system.cards.entities_table"
       },
       "b4194e1e-97af-ed0b-a6a4-70011c71c579": {
-        "typeFullFqn": "system.cards.markdown_card",
+        "typeFullFqn": "system.gateway_widgets.markdown_card",
         "type": "latest",
         "sizeX": 5,
         "sizeY": 3.5,
@@ -4968,7 +4965,7 @@
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextPattern": "let buttonsHtml = \"\" \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    let disabled = false;\n    if (index == 2) {\n        disabled = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\n    } else if (index == 4) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.remoteShell;\n    }\n    buttonsHtml += `<button mat-raised-button disabled=${disabled} color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "markdownTextFunction": "const states = ['storage_statistics', 'machine_statistics', 'custom_statistics'];\nconst currentState = ctx.stateController.getStateId();\nlet buttonsHtml = \"\";\nlet disabled = false;\nconst buttonName = \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    if (states[index] === 'custom_statistics') {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.statistics?.enableCustom;\n    }\n    buttonsHtml += `<button mat-stroked-button [class.tb-primary-fill]=\"${states[index] === currentState}\" disabled=\"${disabled}\" color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
+            "markdownTextFunction": "const currentState = ctx.stateController.getStateId();\nconst conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\nconst disabled = !conf.statistics?.enableCustom;\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'storage_statistics'}\" color=\"primary\" id=\"storage_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.storage-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'machine_statistics'}\" color=\"primary\" id=\"machine_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.machine-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'custom_statistics'}\" disabled=\"${disabled}\" color=\"primary\" id=\"custom_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.custom-statistics' | translate }}\n</button>\n</div>`;",
             "applyDefaultMarkdownStyle": false,
             "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: start;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\r\n}"
           },
@@ -4990,46 +4987,37 @@
           "actions": {
             "elementClick": [
               {
-                "name": "Storage",
+                "name": "storage_statistics",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
-                "type": "updateDashboardState",
-                "targetDashboardStateId": "storage_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
+                "type": "custom",
+                "customFunction": "widgetContext.stateController.updateState('storage_statistics', widgetContext.stateController.getStateParams(), false);\nwidgetContext.$scope.markdownWidget.onDataUpdated();",
                 "openInSeparateDialog": false,
                 "openInPopover": false,
-                "id": "fc4c338d-5799-f7dc-9ecb-448e65f8045d"
+                "id": "56342fb4-e698-1db3-a8f1-34a3b44735c5"
               },
               {
-                "name": "Machine",
+                "name": "machine_statistics",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
-                "type": "updateDashboardState",
-                "targetDashboardStateId": "machine_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
+                "type": "custom",
+                "customFunction": "widgetContext.stateController.updateState('machine_statistics', widgetContext.stateController.getStateParams(), false);\nwidgetContext.$scope.markdownWidget.onDataUpdated();",
                 "openInSeparateDialog": false,
                 "openInPopover": false,
-                "id": "b35fc758-b21a-f5d3-e968-3572f1bb9ad4"
+                "id": "dffa7e63-2382-12fa-ef1c-13e162b1acaf"
               },
               {
-                "name": "Custom",
+                "name": "custom_statistics",
                 "icon": "more_horiz",
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
-                "type": "updateDashboardState",
-                "targetDashboardStateId": "custom_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
+                "type": "custom",
+                "customFunction": "widgetContext.stateController.updateState('custom_statistics', widgetContext.stateController.getStateParams(), false);\nwidgetContext.$scope.markdownWidget.onDataUpdated();",
                 "openInSeparateDialog": false,
                 "openInPopover": false,
-                "id": "fcff099d-8164-08fd-7ffa-e1565772f368"
+                "id": "f6d267d0-3e3e-d519-bf7f-836fd59fd10f"
               }
             ]
           },
@@ -5045,7 +5033,7 @@
         "id": "b4194e1e-97af-ed0b-a6a4-70011c71c579"
       },
       "3a005e49-327c-beaa-8d19-c36b833001f0": {
-        "typeFullFqn": "system.cards.markdown_card",
+        "typeFullFqn": "system.gateway_widgets.markdown_card",
         "type": "latest",
         "sizeX": 5,
         "sizeY": 3.5,
@@ -7451,7 +7439,7 @@
         "id": "7543e668-35b7-bb97-2f14-163399f8d038"
       },
       "7f3ebf9f-d967-44fe-fbe4-4667a2abcf88": {
-        "typeFullFqn": "system.cards.markdown_card",
+        "typeFullFqn": "system.gateway_widgets.markdown_card",
         "type": "latest",
         "sizeX": 5,
         "sizeY": 3.5,
@@ -7580,7 +7568,7 @@
         "id": "7f3ebf9f-d967-44fe-fbe4-4667a2abcf88"
       },
       "ea75a492-d149-9a53-b45f-840a0ce42a40": {
-        "typeFullFqn": "system.cards.markdown_card",
+        "typeFullFqn": "system.gateway_widgets.markdown_card",
         "type": "latest",
         "sizeX": 5,
         "sizeY": 3.5,
@@ -7723,7 +7711,7 @@
         "id": "ea75a492-d149-9a53-b45f-840a0ce42a40"
       },
       "13b57ab5-e5ed-701c-4c67-5bb1198e9a53": {
-        "typeFullFqn": "system.cards.markdown_card",
+        "typeFullFqn": "system.gateway_widgets.markdown_card",
         "type": "latest",
         "sizeX": 5,
         "sizeY": 3.5,
@@ -7866,7 +7854,7 @@
         "id": "13b57ab5-e5ed-701c-4c67-5bb1198e9a53"
       },
       "867613d5-9440-fac1-9156-cd8773df5c97": {
-        "typeFullFqn": "system.cards.markdown_card",
+        "typeFullFqn": "system.gateway_widgets.markdown_card",
         "type": "latest",
         "sizeX": 5,
         "sizeY": 3.5,
@@ -7941,481 +7929,6 @@
         "row": 0,
         "col": 0,
         "id": "867613d5-9440-fac1-9156-cd8773df5c97"
-      },
-      "56274c38-33fc-fe9d-aa39-ff3e1215276b": {
-        "typeFullFqn": "system.cards.markdown_card",
-        "type": "latest",
-        "sizeX": 5,
-        "sizeY": 3.5,
-        "config": {
-          "datasources": [
-            {
-              "type": "entity",
-              "name": "",
-              "entityAliasId": "a2f01c66-96cf-49c5-303f-e6f21c559ee8",
-              "dataKeys": [
-                {
-                  "name": "general_configuration",
-                  "type": "attribute",
-                  "label": "general_configuration",
-                  "color": "#2196f3",
-                  "settings": {},
-                  "_hash": 0.5374662835906896
-                }
-              ],
-              "alarmFilterConfig": {
-                "statusList": [
-                  "ACTIVE"
-                ]
-              }
-            }
-          ],
-          "timewindow": {
-            "displayValue": "",
-            "selectedTab": 0,
-            "realtime": {
-              "realtimeType": 1,
-              "interval": 1000,
-              "timewindowMs": 60000,
-              "quickInterval": "CURRENT_DAY",
-              "hideInterval": false,
-              "hideLastInterval": false,
-              "hideQuickInterval": false
-            },
-            "history": {
-              "historyType": 0,
-              "interval": 1000,
-              "timewindowMs": 60000,
-              "fixedTimewindow": {
-                "startTimeMs": 1732109250067,
-                "endTimeMs": 1732195650067
-              },
-              "quickInterval": "CURRENT_DAY",
-              "hideInterval": false,
-              "hideLastInterval": false,
-              "hideFixedInterval": false,
-              "hideQuickInterval": false
-            },
-            "aggregation": {
-              "type": "AVG",
-              "limit": 25000
-            }
-          },
-          "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
-          "padding": "8px",
-          "settings": {
-            "useMarkdownTextFunction": true,
-            "markdownTextPattern": "let buttonsHtml = \"\" \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    let disabled = false;\n    if (index == 2) {\n        disabled = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\n    } else if (index == 4) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.remoteShell;\n    }\n    buttonsHtml += `<button mat-raised-button disabled=${disabled} color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "markdownTextFunction": "const states = ['storage_statistics', 'machine_statistics', 'custom_statistics'];\nconst currentState = ctx.stateController.getStateId();\nlet buttonsHtml = \"\";\nlet disabled = false;\nconst buttonName = \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    if (states[index] === 'custom_statistics') {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.statistics?.enableCustom;\n    }\n    buttonsHtml += `<button mat-stroked-button [class.tb-primary-fill]=\"${states[index] === currentState}\" disabled=\"${disabled}\" color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "applyDefaultMarkdownStyle": false,
-            "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: start;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\r\n}"
-          },
-          "title": "Markdown/HTML Card",
-          "showTitleIcon": false,
-          "iconColor": "rgba(0, 0, 0, 0.87)",
-          "iconSize": "24px",
-          "titleTooltip": "",
-          "dropShadow": true,
-          "enableFullscreen": false,
-          "widgetStyle": {},
-          "titleStyle": {
-            "fontSize": "16px",
-            "fontWeight": 400
-          },
-          "showLegend": false,
-          "useDashboardTimewindow": true,
-          "displayTimewindow": true,
-          "actions": {
-            "elementClick": [
-              {
-                "name": "Storage",
-                "icon": "more_horiz",
-                "useShowWidgetActionFunction": null,
-                "showWidgetActionFunction": "return true;",
-                "type": "updateDashboardState",
-                "targetDashboardStateId": "storage_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
-                "openInSeparateDialog": false,
-                "openInPopover": false,
-                "id": "fc4c338d-5799-f7dc-9ecb-448e65f8045d"
-              },
-              {
-                "name": "Machine",
-                "icon": "more_horiz",
-                "useShowWidgetActionFunction": null,
-                "showWidgetActionFunction": "return true;",
-                "type": "updateDashboardState",
-                "targetDashboardStateId": "machine_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
-                "openInSeparateDialog": false,
-                "openInPopover": false,
-                "id": "b35fc758-b21a-f5d3-e968-3572f1bb9ad4"
-              },
-              {
-                "name": "Custom",
-                "icon": "more_horiz",
-                "useShowWidgetActionFunction": null,
-                "showWidgetActionFunction": "return true;",
-                "type": "updateDashboardState",
-                "targetDashboardStateId": "custom_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
-                "openInSeparateDialog": false,
-                "openInPopover": false,
-                "id": "10a5a4b6-71fb-f51c-2836-bb360938127f"
-              }
-            ]
-          },
-          "borderRadius": "5px",
-          "widgetCss": "",
-          "pageSize": 1024,
-          "noDataDisplayMessage": "",
-          "margin": "16px 16px 0 0",
-          "enableDataExport": false
-        },
-        "row": 0,
-        "col": 0,
-        "id": "56274c38-33fc-fe9d-aa39-ff3e1215276b"
-      },
-      "38063fe5-1bd8-695b-a40b-92c1aed19831": {
-        "typeFullFqn": "system.gateway_widgets.gateway_status",
-        "type": "latest",
-        "sizeX": 7.5,
-        "sizeY": 3,
-        "config": {
-          "datasources": [
-            {
-              "type": "entity",
-              "name": "function",
-              "entityAliasId": "a2f01c66-96cf-49c5-303f-e6f21c559ee8",
-              "dataKeys": [
-                {
-                  "name": "active",
-                  "type": "attribute",
-                  "label": "active",
-                  "color": "#2196f3",
-                  "settings": {},
-                  "_hash": 0.07932656697286933
-                },
-                {
-                  "name": "lastDisconnectTime",
-                  "type": "attribute",
-                  "label": "lastDisconnectTime",
-                  "color": "#4caf50",
-                  "settings": {},
-                  "_hash": 0.06662431625551446
-                },
-                {
-                  "name": "lastConnectTime",
-                  "type": "attribute",
-                  "label": "lastConnectTime",
-                  "color": "#f44336",
-                  "settings": {},
-                  "_hash": 0.28485659401606434
-                }
-              ],
-              "alarmFilterConfig": {
-                "statusList": [
-                  "ACTIVE"
-                ]
-              }
-            }
-          ],
-          "timewindow": {
-            "displayValue": "",
-            "selectedTab": 0,
-            "realtime": {
-              "realtimeType": 1,
-              "interval": 1000,
-              "timewindowMs": 60000,
-              "quickInterval": "CURRENT_DAY",
-              "hideInterval": false,
-              "hideLastInterval": false,
-              "hideQuickInterval": false
-            },
-            "history": {
-              "historyType": 0,
-              "interval": 1000,
-              "timewindowMs": 60000,
-              "fixedTimewindow": {
-                "startTimeMs": 1733240126084,
-                "endTimeMs": 1733326526084
-              },
-              "quickInterval": "CURRENT_DAY",
-              "hideInterval": false,
-              "hideLastInterval": false,
-              "hideFixedInterval": false,
-              "hideQuickInterval": false
-            },
-            "aggregation": {
-              "type": "AVG",
-              "limit": 25000
-            }
-          },
-          "showTitle": false,
-          "backgroundColor": "rgb(255, 255, 255)",
-          "color": "rgba(0, 0, 0, 0.87)",
-          "padding": "",
-          "settings": {
-            "cardHtml": "<div class='card'>HTML code here</div>",
-            "cardCss": ".card {\n    font-weight: bold;\n    font-size: 32px;\n    color: #999;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}"
-          },
-          "title": "HTML Card",
-          "dropShadow": true,
-          "useDashboardTimewindow": true,
-          "displayTimewindow": true,
-          "enableFullscreen": false,
-          "margin": "16px 16px 16px 0",
-          "borderRadius": "5px",
-          "widgetStyle": {},
-          "widgetCss": "",
-          "pageSize": 1024,
-          "noDataDisplayMessage": "",
-          "enableDataExport": false
-        },
-        "row": 0,
-        "col": 0,
-        "id": "38063fe5-1bd8-695b-a40b-92c1aed19831"
-      },
-      "e48e7a66-a30e-2494-b0c0-dd3249944286": {
-        "typeFullFqn": "system.gateway_widgets.gateway_status",
-        "type": "latest",
-        "sizeX": 7.5,
-        "sizeY": 3,
-        "config": {
-          "datasources": [
-            {
-              "type": "entity",
-              "name": "function",
-              "entityAliasId": "a2f01c66-96cf-49c5-303f-e6f21c559ee8",
-              "dataKeys": [
-                {
-                  "name": "active",
-                  "type": "attribute",
-                  "label": "active",
-                  "color": "#2196f3",
-                  "settings": {},
-                  "_hash": 0.07932656697286933
-                },
-                {
-                  "name": "lastDisconnectTime",
-                  "type": "attribute",
-                  "label": "lastDisconnectTime",
-                  "color": "#4caf50",
-                  "settings": {},
-                  "_hash": 0.06662431625551446
-                },
-                {
-                  "name": "lastConnectTime",
-                  "type": "attribute",
-                  "label": "lastConnectTime",
-                  "color": "#f44336",
-                  "settings": {},
-                  "_hash": 0.28485659401606434
-                }
-              ],
-              "alarmFilterConfig": {
-                "statusList": [
-                  "ACTIVE"
-                ]
-              }
-            }
-          ],
-          "timewindow": {
-            "displayValue": "",
-            "selectedTab": 0,
-            "realtime": {
-              "realtimeType": 1,
-              "interval": 1000,
-              "timewindowMs": 60000,
-              "quickInterval": "CURRENT_DAY",
-              "hideInterval": false,
-              "hideLastInterval": false,
-              "hideQuickInterval": false
-            },
-            "history": {
-              "historyType": 0,
-              "interval": 1000,
-              "timewindowMs": 60000,
-              "fixedTimewindow": {
-                "startTimeMs": 1733240126084,
-                "endTimeMs": 1733326526084
-              },
-              "quickInterval": "CURRENT_DAY",
-              "hideInterval": false,
-              "hideLastInterval": false,
-              "hideFixedInterval": false,
-              "hideQuickInterval": false
-            },
-            "aggregation": {
-              "type": "AVG",
-              "limit": 25000
-            }
-          },
-          "showTitle": false,
-          "backgroundColor": "rgb(255, 255, 255)",
-          "color": "rgba(0, 0, 0, 0.87)",
-          "padding": "",
-          "settings": {
-            "cardHtml": "<div class='card'>HTML code here</div>",
-            "cardCss": ".card {\n    font-weight: bold;\n    font-size: 32px;\n    color: #999;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}"
-          },
-          "title": "HTML Card",
-          "dropShadow": true,
-          "useDashboardTimewindow": true,
-          "displayTimewindow": true,
-          "enableFullscreen": false,
-          "margin": "16px 16px 16px 0",
-          "borderRadius": "5px",
-          "widgetStyle": {},
-          "widgetCss": "",
-          "pageSize": 1024,
-          "noDataDisplayMessage": "",
-          "enableDataExport": false
-        },
-        "row": 0,
-        "col": 0,
-        "id": "e48e7a66-a30e-2494-b0c0-dd3249944286"
-      },
-      "3a1f2fe6-7da9-15aa-777d-383e0ac01520": {
-        "typeFullFqn": "system.cards.markdown_card",
-        "type": "latest",
-        "sizeX": 5,
-        "sizeY": 3.5,
-        "config": {
-          "datasources": [
-            {
-              "type": "entity",
-              "name": "",
-              "entityAliasId": "a2f01c66-96cf-49c5-303f-e6f21c559ee8",
-              "dataKeys": [],
-              "alarmFilterConfig": {
-                "statusList": [
-                  "ACTIVE"
-                ]
-              }
-            }
-          ],
-          "timewindow": {
-            "displayValue": "",
-            "selectedTab": 0,
-            "realtime": {
-              "realtimeType": 1,
-              "interval": 1000,
-              "timewindowMs": 60000,
-              "quickInterval": "CURRENT_DAY",
-              "hideInterval": false,
-              "hideLastInterval": false,
-              "hideQuickInterval": false
-            },
-            "history": {
-              "historyType": 0,
-              "interval": 1000,
-              "timewindowMs": 60000,
-              "fixedTimewindow": {
-                "startTimeMs": 1732109250067,
-                "endTimeMs": 1732195650067
-              },
-              "quickInterval": "CURRENT_DAY",
-              "hideInterval": false,
-              "hideLastInterval": false,
-              "hideFixedInterval": false,
-              "hideQuickInterval": false
-            },
-            "aggregation": {
-              "type": "AVG",
-              "limit": 25000
-            }
-          },
-          "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
-          "padding": "8px",
-          "settings": {
-            "useMarkdownTextFunction": true,
-            "markdownTextPattern": "let buttonsHtml = \"\" \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    let disabled = false;\n    if (index == 2) {\n        disabled = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\n    } else if (index == 4) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.remoteShell;\n    }\n    buttonsHtml += `<button mat-raised-button disabled=${disabled} color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "markdownTextFunction": "const states = ['storage_statistics', 'machine_statistics', 'custom_statistics'];\nconst currentState = ctx.stateController.getStateId();\nlet buttonsHtml = \"\";\nconst buttonName = \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    buttonsHtml += `<button mat-stroked-button [class.tb-primary-fill]=\"${states[index] === currentState}\" disabled=\"false\" color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "applyDefaultMarkdownStyle": false,
-            "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: start;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\r\n}"
-          },
-          "title": "Markdown/HTML Card",
-          "showTitleIcon": false,
-          "iconColor": "rgba(0, 0, 0, 0.87)",
-          "iconSize": "24px",
-          "titleTooltip": "",
-          "dropShadow": true,
-          "enableFullscreen": false,
-          "widgetStyle": {},
-          "titleStyle": {
-            "fontSize": "16px",
-            "fontWeight": 400
-          },
-          "showLegend": false,
-          "useDashboardTimewindow": true,
-          "displayTimewindow": true,
-          "actions": {
-            "elementClick": [
-              {
-                "name": "Storage",
-                "icon": "more_horiz",
-                "useShowWidgetActionFunction": null,
-                "showWidgetActionFunction": "return true;",
-                "type": "updateDashboardState",
-                "targetDashboardStateId": "storage_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
-                "openInSeparateDialog": false,
-                "openInPopover": false,
-                "id": "fc4c338d-5799-f7dc-9ecb-448e65f8045d"
-              },
-              {
-                "name": "Machine",
-                "icon": "more_horiz",
-                "useShowWidgetActionFunction": null,
-                "showWidgetActionFunction": "return true;",
-                "type": "updateDashboardState",
-                "targetDashboardStateId": "machine_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
-                "openInSeparateDialog": false,
-                "openInPopover": false,
-                "id": "b35fc758-b21a-f5d3-e968-3572f1bb9ad4"
-              },
-              {
-                "name": "Custom",
-                "icon": "more_horiz",
-                "useShowWidgetActionFunction": null,
-                "showWidgetActionFunction": "return true;",
-                "type": "updateDashboardState",
-                "targetDashboardStateId": "custom_statistics",
-                "setEntityId": true,
-                "stateEntityParamName": null,
-                "openRightLayout": false,
-                "openInSeparateDialog": false,
-                "openInPopover": false,
-                "id": "fcff099d-8164-08fd-7ffa-e1565772f368"
-              }
-            ]
-          },
-          "borderRadius": "5px",
-          "widgetCss": "",
-          "pageSize": 1024,
-          "noDataDisplayMessage": "",
-          "margin": "16px 16px 0 0",
-          "enableDataExport": false
-        },
-        "row": 0,
-        "col": 0,
-        "id": "3a1f2fe6-7da9-15aa-777d-383e0ac01520"
       },
       "7a34986a-ec7f-4c64-84f9-338cf1626722": {
         "typeFullFqn": "system.gateway_widgets.gateway_custom_statistics",
@@ -9059,7 +8572,7 @@
                 "mobileOrder": 2,
                 "mobileHeight": null
               },
-              "56274c38-33fc-fe9d-aa39-ff3e1215276b": {
+              "b4194e1e-97af-ed0b-a6a4-70011c71c579": {
                 "sizeX": 5,
                 "sizeY": 12,
                 "resizable": true,
@@ -9068,7 +8581,7 @@
                 "mobileOrder": 1,
                 "mobileHeight": 3
               },
-              "38063fe5-1bd8-695b-a40b-92c1aed19831": {
+              "bc199c75-00da-ca8a-dd0d-16da97a9fa53": {
                 "sizeX": 5,
                 "sizeY": 2,
                 "row": 12,
@@ -9728,25 +9241,6 @@
         "layouts": {
           "main": {
             "widgets": {
-              "e48e7a66-a30e-2494-b0c0-dd3249944286": {
-                "sizeX": 4,
-                "sizeY": 2,
-                "preserveAspectRatio": false,
-                "resizable": true,
-                "row": 12,
-                "col": 20,
-                "mobileOrder": 3,
-                "mobileHeight": 2
-              },
-              "3a1f2fe6-7da9-15aa-777d-383e0ac01520": {
-                "sizeX": 4,
-                "sizeY": 12,
-                "resizable": true,
-                "row": 0,
-                "col": 20,
-                "mobileOrder": 1,
-                "mobileHeight": 3
-              },
               "7a34986a-ec7f-4c64-84f9-338cf1626722": {
                 "sizeX": 20,
                 "sizeY": 14,
@@ -9755,6 +9249,21 @@
                 "col": 0,
                 "resizable": true,
                 "mobileOrder": 2
+              },
+              "b4194e1e-97af-ed0b-a6a4-70011c71c579": {
+                "sizeX": 4,
+                "sizeY": 12,
+                "resizable": true,
+                "row": 0,
+                "col": 20
+              },
+              "bc199c75-00da-ca8a-dd0d-16da97a9fa53": {
+                "sizeX": 4,
+                "sizeY": 2,
+                "preserveAspectRatio": false,
+                "resizable": true,
+                "row": 12,
+                "col": 20
               }
             },
             "gridSettings": {
@@ -9771,6 +9280,32 @@
               "backgroundImageUrl": null,
               "mobileAutoFillHeight": false,
               "mobileRowHeight": 70
+            }
+          }
+        }
+      },
+      "gateway_status": {
+        "name": "gateway_status",
+        "root": false,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "bc199c75-00da-ca8a-dd0d-16da97a9fa53": {
+                "sizeX": 5,
+                "sizeY": 3,
+                "preserveAspectRatio": false,
+                "resizable": true,
+                "row": 0,
+                "col": 0
+              }
+            },
+            "gridSettings": {
+              "layoutType": "default",
+              "backgroundColor": "#eeeeee",
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundSizeMode": "100%"
             }
           }
         }
