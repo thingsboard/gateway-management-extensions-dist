@@ -236,9 +236,12 @@
             "headerButton": [
               {
                 "name": "Add Gateway",
-                "buttonType": "icon",
+                "buttonType": "flat",
+                "showIcon": true,
                 "icon": "add",
-                "buttonColor": "rgba(0, 0, 0, 0.87)",
+                "buttonColor": "#ffffff",
+                "buttonFillColor": "#305680",
+                "customButtonStyle": {},
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
                 "type": "customPretty",
@@ -249,6 +252,20 @@
                 "openInSeparateDialog": false,
                 "openInPopover": false,
                 "id": "9aab301f-a305-520b-4842-b02ca92a5970"
+              },
+              {
+                "name": "Refresh",
+                "buttonType": "icon",
+                "icon": "refresh",
+                "buttonColor": "rgba(0, 0, 0, 0.87)",
+                "customButtonStyle": {},
+                "useShowWidgetActionFunction": false,
+                "showWidgetActionFunction": "return true;",
+                "type": "custom",
+                "customFunction": "console.log(\"widgetContext\",widgetContext);\nwidgetContext.updateAliases();",
+                "openInSeparateDialog": false,
+                "openInPopover": false,
+                "id": "b55b76ac-78aa-2c81-4550-d7cf59785852"
               }
             ]
           },
@@ -256,7 +273,7 @@
           "titleTooltip": "",
           "enableDataExport": false,
           "widgetStyle": {},
-          "widgetCss": "",
+          "widgetCss": ".tb-table-widget .tb-absolute-fill mat-toolbar.mat-mdc-table-toolbar {\n    height: 50px;\n    max-height: 50px;\n}",
           "pageSize": 1024,
           "noDataDisplayMessage": "",
           "configMode": "advanced",
