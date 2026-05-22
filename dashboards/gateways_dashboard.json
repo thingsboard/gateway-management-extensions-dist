@@ -249,6 +249,20 @@
                 "openInSeparateDialog": false,
                 "openInPopover": false,
                 "id": "9aab301f-a305-520b-4842-b02ca92a5970"
+              },
+              {
+                "name": "Auto-provision",
+                "buttonType": "icon",
+                "icon": "auto_fix_high",
+                "buttonColor": "rgba(0, 0, 0, 0.87)",
+                "useShowWidgetActionFunction": null,
+                "showWidgetActionFunction": "return true;",
+                "type": "custom",
+                "customFunction": "let $injector = widgetContext.$scope.$injector;\nlet service = $injector.get(widgetContext.servicesMap.get('agentAutoProvisionDialogService'));\nservice.open('GATEWAY').subscribe(function(result) {\n    if (result) {\n        widgetContext.updateAliases();\n    }\n});\n",
+                "customResources": [],
+                "openInSeparateDialog": false,
+                "openInPopover": false,
+                "id": "b1a4d5e2-7c9f-4a1b-9e3d-2f8c5a0d6b41"
               }
             ]
           },
