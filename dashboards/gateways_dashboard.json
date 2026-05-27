@@ -174,6 +174,18 @@
                 "id": "ae2e5995-505f-a241-5fb2-6cbaf08b1b55"
               },
               {
+                "name": "Manage by agent",
+                "icon": "smart_toy",
+                "useShowWidgetActionFunction": null,
+                "showWidgetActionFunction": "return true;",
+                "type": "custom",
+                "customFunction": "let $injector = widgetContext.$scope.$injector;\nlet service = $injector.get(widgetContext.servicesMap.get('agentDeployDialogService'));\nservice.open('GATEWAY', entityId).subscribe(function (result) {\n    widgetContext.updateAliases();\n});\n",
+                "customResources": [],
+                "openInSeparateDialog": false,
+                "openInPopover": false,
+                "id": "9358777f-21d9-433e-a8e5-ae53e1e563c2"
+              },
+              {
                 "name": "General configuration",
                 "icon": "settings",
                 "useShowWidgetActionFunction": null,
