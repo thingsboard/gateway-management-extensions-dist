@@ -8972,7 +8972,7 @@
       "showTitle": false,
       "showDashboardsSelect": false,
       "showEntitiesSelect": false,
-      "showDashboardTimewindow": true,
+      "showDashboardTimewindow": false,
       "showDashboardExport": false,
       "toolbarAlwaysOpen": true,
       "titleColor": "rgba(0,0,0,0.870588)",
