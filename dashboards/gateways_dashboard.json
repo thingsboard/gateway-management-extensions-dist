@@ -4477,7 +4477,25 @@
           "widgetCss": "",
           "pageSize": 1024,
           "noDataDisplayMessage": "",
-          "useDashboardTimewindow": true,
+          "useDashboardTimewindow": false,
+          "displayTimewindow": false,
+          "timewindow": {
+            "hideAggregation": false,
+            "hideAggInterval": false,
+            "hideTimezone": false,
+            "selectedTab": 0,
+            "realtime": {
+              "realtimeType": 0,
+              "timewindowMs": 900000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 120000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 25000
+            },
+            "timezone": null
+          },
           "decimals": 0,
           "titleColor": "rgba(0, 0, 0, 0.87)",
           "borderRadius": "5px",
@@ -4679,7 +4697,25 @@
           "widgetCss": "",
           "pageSize": 1024,
           "noDataDisplayMessage": "",
-          "useDashboardTimewindow": true,
+          "useDashboardTimewindow": false,
+          "displayTimewindow": false,
+          "timewindow": {
+            "hideAggregation": false,
+            "hideAggInterval": false,
+            "hideTimezone": false,
+            "selectedTab": 0,
+            "realtime": {
+              "realtimeType": 0,
+              "timewindowMs": 900000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 120000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 25000
+            },
+            "timezone": null
+          },
           "decimals": 0,
           "titleColor": "rgba(0, 0, 0, 0.87)",
           "borderRadius": "5px",
@@ -6905,7 +6941,25 @@
             "fontWeight": 400
           },
           "mobileHeight": null,
-          "useDashboardTimewindow": true,
+          "useDashboardTimewindow": false,
+          "displayTimewindow": false,
+          "timewindow": {
+            "hideAggregation": false,
+            "hideAggInterval": false,
+            "hideTimezone": false,
+            "selectedTab": 0,
+            "realtime": {
+              "realtimeType": 0,
+              "timewindowMs": 900000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 120000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 25000
+            },
+            "timezone": null
+          },
           "showTitleIcon": false,
           "titleTooltip": "",
           "margin": "16px",
@@ -8972,7 +9026,7 @@
       "showTitle": false,
       "showDashboardsSelect": false,
       "showEntitiesSelect": false,
-      "showDashboardTimewindow": true,
+      "showDashboardTimewindow": false,
       "showDashboardExport": false,
       "toolbarAlwaysOpen": true,
       "titleColor": "rgba(0,0,0,0.870588)",
