@@ -1305,50 +1305,7 @@
               "name": null,
               "entityAliasId": "a2f01c66-96cf-49c5-303f-e6f21c559ee8",
               "filterId": null,
-              "dataKeys": [
-                {
-                  "name": "SERVICE_LOGS",
-                  "type": "timeseries",
-                  "label": "{i18n:widgets.gateway.level}",
-                  "color": "#4caf50",
-                  "settings": {
-                    "useCellStyleFunction": false,
-                    "useCellContentFunction": true,
-                    "cellContentFunction": "let cssClass;\r\nswitch (value) {\r\n      case \"DEBUG\":\r\n        cssClass = \"status status-debug\";\r\n        break;\r\n      case \"WARNING\":\r\n        cssClass = \"status status-warning\";\r\n        break;\r\n      case \"ERROR\":\r\n      case \"EXCEPTION\":\r\n        cssClass = \"status status-error\";\r\n        break;\r\n      case \"INFO\":\r\n      default:\r\n        cssClass = \"status status-info\";\r\n        break;\r\n    }\r\n    \r\n    return `<span class='${cssClass}'>${value}</span>`;"
-                  },
-                  "_hash": 0.6667576563240645,
-                  "aggregationType": null,
-                  "units": null,
-                  "decimals": null,
-                  "funcBody": null,
-                  "usePostProcessing": true,
-                  "postFuncBody": "if (value.includes(\"RPC\")&&!value.includes(\"GRPC\")) {\n    let parsedValue = value.match(/\\|(\\w+)\\|/);\n    parsedValue = parsedValue ? parsedValue[1] :\n    parsedValue;\n    return parsedValue || value;\n} else return '';"
-                },
-                {
-                  "name": "SERVICE_LOGS",
-                  "type": "timeseries",
-                  "label": "Details",
-                  "color": "#2196f3",
-                  "settings": {
-                    "useCellStyleFunction": false,
-                    "useCellContentFunction": true,
-                    "cellContentFunction": "let statusValue = value.match(/\\|(\\w+)\\|/); \r\nstatusValue =  statusValue? statusValue[1] : statusValue;\r\nlet cssClass = statusValue === \"EXCEPTION\" ?\r\n    \"msg-status-exception\" : 'msg';\r\nlet parsedValue = /\\[(.*)/.exec(value);\r\nparsedValue = parsedValue ? parsedValue[0] : parsedValue;\r\nreturn `<span class='${cssClass}'>${parsedValue || value}</span>`;"
-                  },
-                  "_hash": 0.6931154680365814,
-                  "aggregationType": null,
-                  "units": null,
-                  "decimals": null,
-                  "funcBody": null,
-                  "usePostProcessing": true,
-                  "postFuncBody": "if (value.includes(\"RPC\")&&!value.includes(\"GRPC\")) {\n    return value;\n} else return '';"
-                }
-              ],
-              "alarmFilterConfig": {
-                "statusList": [
-                  "ACTIVE"
-                ]
-              },
-              "latestDataKeys": []
+              "dataKeys": []
             }
           ],
           "timewindow": {
@@ -1361,62 +1318,49 @@
             "selectedTab": 0,
             "realtime": {
               "realtimeType": 0,
-              "timewindowMs": 604800000,
+              "timewindowMs": 43200000,
               "quickInterval": "CURRENT_DAY",
               "interval": 1000
             },
             "aggregation": {
               "type": "NONE",
-              "limit": 200
-            }
+              "limit": 25000
+            },
+            "timezone": null
           },
           "showTitle": true,
-          "backgroundColor": "rgb(255, 255, 255)",
+          "backgroundColor": "#fff",
           "color": "rgba(0, 0, 0, 0.87)",
           "padding": "8px",
           "settings": {
-            "enableSearch": true,
-            "enableSelectColumnDisplay": true,
-            "enableStickyHeader": true,
-            "enableStickyAction": true,
-            "showCellActionsMenu": true,
-            "reserveSpaceForHiddenAction": "true",
-            "showTimestamp": true,
-            "showMilliseconds": false,
-            "displayPagination": true,
-            "useEntityLabel": false,
-            "defaultPageSize": 10,
-            "hideEmptyLines": true,
-            "disableStickyHeader": false,
-            "useRowStyleFunction": false
+            "isConnectorLog": true,
+            "connectorLogState": "connector_rpc",
+            "isRpcLog": true
           },
           "title": "RPC Logs",
+          "showTitleIcon": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "widgetStyle": {},
+          "widgetCss": "",
+          "pageSize": 1024,
+          "noDataDisplayMessage": "",
+          "enableDataExport": false,
+          "showLegend": false,
+          "useDashboardTimewindow": false,
+          "displayTimewindow": true,
+          "titleTooltip": "",
           "titleStyle": {
             "fontSize": "16px",
             "fontWeight": 600,
             "padding": "5px 10px 5px 10px"
           },
-          "useDashboardTimewindow": false,
-          "showLegend": false,
-          "widgetStyle": {},
-          "actions": {},
-          "showTitleIcon": false,
-          "iconColor": "rgba(0, 0, 0, 0.87)",
-          "iconSize": "24px",
-          "displayTimewindow": true,
-          "titleTooltip": "",
-          "widgetCss": ".status {\r\n    border-radius: 20px;\r\n    font-weight: 500;\r\n    padding: 5px 15px;\r\n}\r\n\r\n.status-debug {\r\n    color: green;\r\n    background: rgba(0, 128, 0, 0.1);\r\n}\r\n\r\n.status-warning {\r\n    color: orange;\r\n    background: rgba(255, 165, 0, 0.1);\r\n}\r\n\r\n.status-error {\r\n    color: red;\r\n    background: rgba(255, 0, 0, 0.1);\r\n}\r\n\r\n.status-info {\r\n    color: blue;\r\n    background: rgba(0, 0, 128, 0.1);\r\n}\r\n\r\n.msg-status-exception {\r\n    color: red;\r\n}",
-          "pageSize": 1024,
-          "noDataDisplayMessage": "",
-          "enableDataExport": false,
           "borderRadius": "4px"
         },
         "row": 0,
         "col": 0,
         "id": "0fc7dcf3-32a2-0159-738e-96956bf0d450",
-        "typeFullFqn": "system.cards.timeseries_table"
+        "typeFullFqn": "system.gateway_widgets.gateway_logs"
       },
       "6e136fbc-545b-4926-c0a9-79348f35628a": {
         "type": "rpc",
