@@ -1309,7 +1309,7 @@
                 {
                   "name": "SERVICE_LOGS",
                   "type": "timeseries",
-                  "label": "Status",
+                  "label": "{i18n:widgets.gateway.level}",
                   "color": "#4caf50",
                   "settings": {
                     "useCellStyleFunction": false,
