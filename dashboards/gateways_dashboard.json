@@ -4357,6 +4357,14 @@
                   "color": "#2196f3",
                   "settings": {},
                   "_hash": 0.3480165322736335
+                },
+                {
+                  "name": "Version",
+                  "type": "attribute",
+                  "label": "Version",
+                  "color": "#4caf50",
+                  "settings": {},
+                  "_hash": 0.5839614727034592
                 }
               ],
               "alarmFilterConfig": {
@@ -4373,7 +4381,7 @@
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextPattern": "let buttonsHtml = \"\" \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    let disabled = false;\n    if (index == 2) {\n        disabled = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\n    } else if (index == 4) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.remoteShell;\n    }\n    buttonsHtml += `<button mat-raised-button disabled=${disabled} color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "markdownTextFunction": "const currentState = ctx.stateController.getStateId();\nconst conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\nconst disabled = !conf.statistics?.enableCustom;\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'storage_statistics'}\" color=\"primary\" id=\"storage_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.storage-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'machine_statistics'}\" color=\"primary\" id=\"machine_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.machine-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'custom_statistics'}\" disabled=\"${disabled}\" color=\"primary\" id=\"custom_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.custom-statistics' | translate }}\n</button>\n</div>`;",
+            "markdownTextFunction": "const currentState = ctx.stateController.getStateId();\nconst conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : null;\nconst stats = conf?.statistics;\nconst [major = 0, minor = 0, patch = 0] = String(data[0].Version ?? '').split('.').map(part => parseInt(part, 10) || 0);\nconst hasUpdatedStatistics = major !== 3 ? major > 3 : minor !== 7 ? minor > 7 : patch >= 3;\nconst customEnabled = hasUpdatedStatistics ? (stats?.enableCustom ?? stats?.enable) : stats?.enable;\nconst disabled = !conf || !customEnabled;\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'storage_statistics'}\" color=\"primary\" id=\"storage_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.storage-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'machine_statistics'}\" color=\"primary\" id=\"machine_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.machine-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'custom_statistics'}\" disabled=\"${disabled}\" color=\"primary\" id=\"custom_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.custom-statistics' | translate }}\n</button>\n</div>`;",
             "applyDefaultMarkdownStyle": false,
             "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: start;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\r\n}"
           },
