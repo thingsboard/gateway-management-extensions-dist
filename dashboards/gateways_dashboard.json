@@ -1279,50 +1279,7 @@
               "name": null,
               "entityAliasId": "a2f01c66-96cf-49c5-303f-e6f21c559ee8",
               "filterId": null,
-              "dataKeys": [
-                {
-                  "name": "SERVICE_LOGS",
-                  "type": "timeseries",
-                  "label": "Status",
-                  "color": "#4caf50",
-                  "settings": {
-                    "useCellStyleFunction": false,
-                    "useCellContentFunction": true,
-                    "cellContentFunction": "let cssClass;\r\nswitch (value) {\r\n      case \"DEBUG\":\r\n        cssClass = \"status status-debug\";\r\n        break;\r\n      case \"WARNING\":\r\n        cssClass = \"status status-warning\";\r\n        break;\r\n      case \"ERROR\":\r\n      case \"EXCEPTION\":\r\n        cssClass = \"status status-error\";\r\n        break;\r\n      case \"INFO\":\r\n      default:\r\n        cssClass = \"status status-info\";\r\n        break;\r\n    }\r\n    \r\n    return `<span class='${cssClass}'>${value}</span>`;"
-                  },
-                  "_hash": 0.6667576563240645,
-                  "aggregationType": null,
-                  "units": null,
-                  "decimals": null,
-                  "funcBody": null,
-                  "usePostProcessing": true,
-                  "postFuncBody": "if (value.includes(\"RPC\")&&!value.includes(\"GRPC\")) {\n    let parsedValue = value.match(/\\|(\\w+)\\|/);\n    parsedValue = parsedValue ? parsedValue[1] :\n    parsedValue;\n    return parsedValue || value;\n} else return '';"
-                },
-                {
-                  "name": "SERVICE_LOGS",
-                  "type": "timeseries",
-                  "label": "Details",
-                  "color": "#2196f3",
-                  "settings": {
-                    "useCellStyleFunction": false,
-                    "useCellContentFunction": true,
-                    "cellContentFunction": "let statusValue = value.match(/\\|(\\w+)\\|/); \r\nstatusValue =  statusValue? statusValue[1] : statusValue;\r\nlet cssClass = statusValue === \"EXCEPTION\" ?\r\n    \"msg-status-exception\" : 'msg';\r\nlet parsedValue = /\\[(.*)/.exec(value);\r\nparsedValue = parsedValue ? parsedValue[0] : parsedValue;\r\nreturn `<span class='${cssClass}'>${parsedValue || value}</span>`;"
-                  },
-                  "_hash": 0.6931154680365814,
-                  "aggregationType": null,
-                  "units": null,
-                  "decimals": null,
-                  "funcBody": null,
-                  "usePostProcessing": true,
-                  "postFuncBody": "if (value.includes(\"RPC\")&&!value.includes(\"GRPC\")) {\n    return value;\n} else return '';"
-                }
-              ],
-              "alarmFilterConfig": {
-                "statusList": [
-                  "ACTIVE"
-                ]
-              },
-              "latestDataKeys": []
+              "dataKeys": []
             }
           ],
           "timewindow": {
@@ -1335,135 +1292,49 @@
             "selectedTab": 0,
             "realtime": {
               "realtimeType": 0,
-              "timewindowMs": 604800000,
+              "timewindowMs": 43200000,
               "quickInterval": "CURRENT_DAY",
               "interval": 1000
             },
             "aggregation": {
               "type": "NONE",
-              "limit": 200
-            }
+              "limit": 25000
+            },
+            "timezone": null
           },
           "showTitle": true,
-          "backgroundColor": "rgb(255, 255, 255)",
+          "backgroundColor": "#fff",
           "color": "rgba(0, 0, 0, 0.87)",
           "padding": "8px",
           "settings": {
-            "enableSearch": true,
-            "enableSelectColumnDisplay": true,
-            "enableStickyHeader": true,
-            "enableStickyAction": true,
-            "showCellActionsMenu": true,
-            "reserveSpaceForHiddenAction": "true",
-            "showTimestamp": true,
-            "showMilliseconds": false,
-            "displayPagination": true,
-            "useEntityLabel": false,
-            "defaultPageSize": 10,
-            "hideEmptyLines": true,
-            "disableStickyHeader": false,
-            "useRowStyleFunction": false
+            "isConnectorLog": true,
+            "connectorLogState": "connector_rpc",
+            "isRpcLog": true
           },
           "title": "RPC Logs",
+          "showTitleIcon": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "widgetStyle": {},
+          "widgetCss": "",
+          "pageSize": 1024,
+          "noDataDisplayMessage": "",
+          "enableDataExport": false,
+          "showLegend": false,
+          "useDashboardTimewindow": false,
+          "displayTimewindow": true,
+          "titleTooltip": "",
           "titleStyle": {
             "fontSize": "16px",
             "fontWeight": 600,
             "padding": "5px 10px 5px 10px"
           },
-          "useDashboardTimewindow": false,
-          "showLegend": false,
-          "widgetStyle": {},
-          "actions": {},
-          "showTitleIcon": false,
-          "iconColor": "rgba(0, 0, 0, 0.87)",
-          "iconSize": "24px",
-          "displayTimewindow": true,
-          "titleTooltip": "",
-          "widgetCss": ".status {\r\n    border-radius: 20px;\r\n    font-weight: 500;\r\n    padding: 5px 15px;\r\n}\r\n\r\n.status-debug {\r\n    color: green;\r\n    background: rgba(0, 128, 0, 0.1);\r\n}\r\n\r\n.status-warning {\r\n    color: orange;\r\n    background: rgba(255, 165, 0, 0.1);\r\n}\r\n\r\n.status-error {\r\n    color: red;\r\n    background: rgba(255, 0, 0, 0.1);\r\n}\r\n\r\n.status-info {\r\n    color: blue;\r\n    background: rgba(0, 0, 128, 0.1);\r\n}\r\n\r\n.msg-status-exception {\r\n    color: red;\r\n}",
-          "pageSize": 1024,
-          "noDataDisplayMessage": "",
-          "enableDataExport": false,
           "borderRadius": "4px"
         },
         "row": 0,
         "col": 0,
         "id": "0fc7dcf3-32a2-0159-738e-96956bf0d450",
-        "typeFullFqn": "system.cards.timeseries_table"
-      },
-      "6e136fbc-545b-4926-c0a9-79348f35628a": {
-        "type": "rpc",
-        "sizeX": 9.5,
-        "sizeY": 5.5,
-        "config": {
-          "targetDeviceAliases": [],
-          "showTitle": true,
-          "backgroundColor": "#010101",
-          "color": "rgba(255, 254, 254, 0.87)",
-          "padding": "0px",
-          "settings": {
-            "parseGpioStatusFunction": "return body[pin] === true;",
-            "gpioStatusChangeRequest": {
-              "method": "setGpioStatus",
-              "paramsBody": "{\n   \"pin\": \"{$pin}\",\n   \"enabled\": \"{$enabled}\"\n}"
-            },
-            "requestTimeout": 500,
-            "switchPanelBackgroundColor": "#b71c1c",
-            "gpioStatusRequest": {
-              "method": "getGpioStatus",
-              "paramsBody": "{}"
-            },
-            "gpioList": [
-              {
-                "pin": 1,
-                "label": "GPIO 1",
-                "row": 0,
-                "col": 0,
-                "_uniqueKey": 0
-              },
-              {
-                "pin": 2,
-                "label": "GPIO 2",
-                "row": 0,
-                "col": 1,
-                "_uniqueKey": 1
-              },
-              {
-                "pin": 3,
-                "label": "GPIO 3",
-                "row": 1,
-                "col": 0,
-                "_uniqueKey": 2
-              }
-            ]
-          },
-          "title": "New RPC debug terminal",
-          "dropShadow": true,
-          "enableFullscreen": true,
-          "widgetStyle": {},
-          "titleStyle": {
-            "fontSize": "16px",
-            "fontWeight": 400
-          },
-          "showLegend": false,
-          "actions": {},
-          "datasources": [],
-          "showTitleIcon": false,
-          "titleTooltip": "",
-          "widgetCss": "",
-          "pageSize": 1024,
-          "noDataDisplayMessage": "",
-          "borderRadius": "4px",
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "a2f01c66-96cf-49c5-303f-e6f21c559ee8"
-          }
-        },
-        "row": 0,
-        "col": 0,
-        "id": "6e136fbc-545b-4926-c0a9-79348f35628a",
-        "typeFullFqn": "system.control_widgets.rpc_debug_terminal"
+        "typeFullFqn": "system.gateway_widgets.gateway_logs"
       },
       "fb9df382-6ef3-4aa6-bc13-8bf8e300ba19": {
         "type": "latest",
@@ -4331,6 +4202,14 @@
                   "color": "#2196f3",
                   "settings": {},
                   "_hash": 0.3480165322736335
+                },
+                {
+                  "name": "Version",
+                  "type": "attribute",
+                  "label": "Version",
+                  "color": "#4caf50",
+                  "settings": {},
+                  "_hash": 0.5839614727034592
                 }
               ],
               "alarmFilterConfig": {
@@ -4347,7 +4226,7 @@
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextPattern": "let buttonsHtml = \"\" \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    let disabled = false;\n    if (index == 2) {\n        disabled = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\n    } else if (index == 4) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.remoteShell;\n    }\n    buttonsHtml += `<button mat-raised-button disabled=${disabled} color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "markdownTextFunction": "const currentState = ctx.stateController.getStateId();\nconst conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\nconst disabled = !conf.statistics?.enableCustom;\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'storage_statistics'}\" color=\"primary\" id=\"storage_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.storage-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'machine_statistics'}\" color=\"primary\" id=\"machine_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.machine-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'custom_statistics'}\" disabled=\"${disabled}\" color=\"primary\" id=\"custom_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.custom-statistics' | translate }}\n</button>\n</div>`;",
+            "markdownTextFunction": "const currentState = ctx.stateController.getStateId();\nconst conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : null;\nconst stats = conf?.statistics;\nconst [major = 0, minor = 0, patch = 0] = String(data[0].Version ?? '').split('.').map(part => parseInt(part, 10) || 0);\nconst hasUpdatedStatistics = major !== 3 ? major > 3 : minor !== 7 ? minor > 7 : patch >= 3;\nconst customEnabled = hasUpdatedStatistics ? (stats?.enableCustom ?? stats?.enable) : stats?.enable;\nconst disabled = !conf || !customEnabled;\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'storage_statistics'}\" color=\"primary\" id=\"storage_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.storage-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'machine_statistics'}\" color=\"primary\" id=\"machine_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.machine-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'custom_statistics'}\" disabled=\"${disabled}\" color=\"primary\" id=\"custom_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.custom-statistics' | translate }}\n</button>\n</div>`;",
             "applyDefaultMarkdownStyle": false,
             "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: start;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\r\n}"
           },
@@ -7581,13 +7460,6 @@
                 "col": 0,
                 "mobileOrder": 1,
                 "mobileHeight": null
-              },
-              "6e136fbc-545b-4926-c0a9-79348f35628a": {
-                "sizeX": 48,
-                "sizeY": 9,
-                "row": 23,
-                "col": 0,
-                "mobileOrder": 2
               }
             },
             "gridSettings": {
