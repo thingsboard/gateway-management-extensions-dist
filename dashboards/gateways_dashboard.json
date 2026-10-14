@@ -160,7 +160,7 @@
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
                 "type": "customPretty",
-                "customHtml": "<div class=\"container\">\n    <mat-toolbar class=\"flex flex-row items-center\" color=\"primary\">\n        <h2>{{ 'gateway.launch-command' | translate }}</h2>\n        <span class=\"flex-1\"></span>\n        <div [tb-help]=\"'gatewayInstall'\"></div>\n        <button mat-icon-button (click)=\"cancel()\" type=\"button\">\n            <mat-icon class=\"material-icons\">close</mat-icon>\n        </button>\n    </mat-toolbar>\n    <tb-gateway-command [deviceId]=\"entityId\"></tb-gateway-command>\n    <div mat-dialog-actions class=\"flex flex-row justify-end items-center\">\n        <button mat-button color=\"primary\" type=\"button\" (click)=\"cancel()\" cdkFocusInitial>\n            {{ 'action.close' | translate }}\n        </button>\n    </div>\n</div>\n",
+                "customHtml": "<div class=\"container\">\n    <mat-toolbar color=\"tb-primary\" class=\"tb-bottom-border flex flex-row items-center\">\n        <h2>{{ 'gateway.launch-command' | translate }}</h2>\n        <span class=\"flex-1\"></span>\n        <div [tb-help]=\"'gatewayInstall'\"></div>\n        <button mat-icon-button (click)=\"cancel()\" type=\"button\">\n            <mat-icon class=\"material-icons\">close</mat-icon>\n        </button>\n    </mat-toolbar>\n    <tb-gateway-command [deviceId]=\"entityId\"></tb-gateway-command>\n    <div mat-dialog-actions class=\"flex flex-row justify-end items-center\">\n        <button mat-button color=\"primary\" type=\"button\" (click)=\"cancel()\" cdkFocusInitial>\n            {{ 'action.close' | translate }}\n        </button>\n    </div>\n</div>\n",
                 "customCss": ".container {\n    display: grid;\n    grid-template-rows: min-content minmax(auto, 1fr) min-content;\n    height: 100%;\n    max-height: 100vh;\n    width: 600px;\n    max-width: 100%;\n}",
                 "customFunction": "let $injector = widgetContext.$scope.$injector;\nlet customDialog = $injector.get(widgetContext.servicesMap.get('customDialog'));\n\nopenCommands();\n\nfunction openCommands() {\n    customDialog.customDialog(htmlTemplate, CommandsDialogController, {panelClass: \"test\"}).subscribe();\n}\n\nfunction CommandsDialogController(instance) {\n    let vm = instance;\n    \n    vm.entityId = entityId.id;\n\n    vm.cancel = function() {\n        vm.dialogRef.close(null);\n    };\n}\n",
                 "customResources": [
@@ -257,7 +257,7 @@
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
                 "type": "customPretty",
-                "customHtml": "<form #addEntityForm=\"ngForm\" [formGroup]=\"addEntityFormGroup\"\r\n      (ngSubmit)=\"save($event)\" class=\"add-entity-form\">\r\n    <mat-toolbar class=\"flex flex-row items-center\" color=\"primary\">\r\n        <h2>Add gateway</h2>\r\n        <span class=\"flex-1\"></span>\r\n        <button mat-icon-button (click)=\"cancel()\" type=\"button\">\r\n            <mat-icon class=\"material-icons\">close</mat-icon>\r\n        </button>\r\n    </mat-toolbar>\r\n    <mat-progress-bar color=\"warn\" mode=\"indeterminate\" *ngIf=\"isLoading$ | async\">\r\n    </mat-progress-bar>\r\n    <div class=\"h-1\" *ngIf=\"!(isLoading$ | async)\"></div>\r\n    <div mat-dialog-content class=\"flex flex-col\">\r\n        <div class=\"flex flex-row gap-2 flex-wrap\" >\r\n            <mat-form-field class=\"w-full sm:w-auto\" appearance=\"outline\">\r\n                <mat-label>Name</mat-label>\r\n                <input matInput formControlName=\"entityName\" required>\r\n                <mat-error *ngIf=\"addEntityFormGroup.get('entityName').hasError('required') || addEntityFormGroup.get('entityName').hasError('pattern')\">\r\n                    Gateway name is required.\r\n                </mat-error>\r\n            </mat-form-field>\r\n        </div>\r\n        <div class=\"flex flex-row gap-2 flex-wrap\">\r\n            <tb-entity-subtype-autocomplete\r\n                    class=\"w-full sm:w-auto\"\r\n                    formControlName=\"type\"\r\n                    [required]=\"true\"\r\n                    [entityType]=\"'DEVICE'\"\r\n                    appearance=\"outline\"\r\n            ></tb-entity-subtype-autocomplete>\r\n        </div>\r\n    </div>\r\n    <div mat-dialog-actions class=\"flex flex-row justify-end items-center\">\r\n        <button mat-button color=\"primary\"\r\n                type=\"button\"\r\n                [disabled]=\"(isLoading$ | async)\"\r\n                (click)=\"cancel()\" cdkFocusInitial>\r\n            Cancel\r\n        </button>\r\n        <button mat-button mat-raised-button color=\"primary\"\r\n                type=\"submit\"\r\n                [disabled]=\"(isLoading$ | async) || addEntityForm.invalid || !addEntityForm.dirty\">\r\n            Create\r\n        </button>\r\n    </div>\r\n</form>\r\n",
+                "customHtml": "<form #addEntityForm=\"ngForm\" [formGroup]=\"addEntityFormGroup\"\r\n      (ngSubmit)=\"save($event)\" class=\"add-entity-form\">\r\n    <mat-toolbar color=\"tb-primary\" class=\"tb-bottom-border flex flex-row items-center\">\r\n        <h2>Add gateway</h2>\r\n        <span class=\"flex-1\"></span>\r\n        <button mat-icon-button (click)=\"cancel()\" type=\"button\">\r\n            <mat-icon class=\"material-icons\">close</mat-icon>\r\n        </button>\r\n    </mat-toolbar>\r\n    <mat-progress-bar color=\"warn\" mode=\"indeterminate\" *ngIf=\"isLoading$ | async\">\r\n    </mat-progress-bar>\r\n    <div class=\"h-1\" *ngIf=\"!(isLoading$ | async)\"></div>\r\n    <div mat-dialog-content class=\"flex flex-col\">\r\n        <div class=\"flex flex-row gap-2 flex-wrap\" >\r\n            <mat-form-field class=\"w-full sm:w-auto\" appearance=\"outline\">\r\n                <mat-label>Name</mat-label>\r\n                <input matInput formControlName=\"entityName\" required>\r\n                <mat-error *ngIf=\"addEntityFormGroup.get('entityName').hasError('required') || addEntityFormGroup.get('entityName').hasError('pattern')\">\r\n                    Gateway name is required.\r\n                </mat-error>\r\n            </mat-form-field>\r\n        </div>\r\n        <div class=\"flex flex-row gap-2 flex-wrap\">\r\n            <tb-entity-subtype-autocomplete\r\n                    class=\"w-full sm:w-auto\"\r\n                    formControlName=\"type\"\r\n                    [required]=\"true\"\r\n                    [entityType]=\"'DEVICE'\"\r\n                    appearance=\"outline\"\r\n            ></tb-entity-subtype-autocomplete>\r\n        </div>\r\n    </div>\r\n    <div mat-dialog-actions class=\"flex flex-row justify-end items-center\">\r\n        <button mat-button color=\"primary\"\r\n                type=\"button\"\r\n                [disabled]=\"(isLoading$ | async)\"\r\n                (click)=\"cancel()\" cdkFocusInitial>\r\n            Cancel\r\n        </button>\r\n        <button mat-button mat-raised-button color=\"primary\"\r\n                type=\"submit\"\r\n                [disabled]=\"(isLoading$ | async) || addEntityForm.invalid || !addEntityForm.dirty\">\r\n            Create\r\n        </button>\r\n    </div>\r\n</form>\r\n",
                 "customCss": ".add-entity-form {\r\n    min-width: 400px !important;\r\n}\r\n\r\n.add-entity-form .boolean-value-input {\r\n    padding-left: 5px;\r\n}\r\n\r\n.add-entity-form .boolean-value-input .checkbox-label {\r\n    margin-bottom: 8px;\r\n    color: rgba(0,0,0,0.54);\r\n    font-size: 12px;\r\n}\r\n\r\n.relations-list .header {\r\n    padding-right: 5px;\r\n    padding-bottom: 5px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.relations-list .header .cell {\r\n    padding-right: 5px;\r\n    padding-left: 5px;\r\n    font-size: 12px;\r\n    font-weight: 700;\r\n    color: rgba(0, 0, 0, .54);\r\n    white-space: nowrap;\r\n}\r\n\r\n.relations-list .mat-form-field-infix {\r\n    width: auto !important;\r\n}\r\n\r\n.relations-list .body {\r\n    padding-right: 5px;\r\n    padding-bottom: 15px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.relations-list .body .row {\r\n    padding-top: 5px;\r\n}\r\n\r\n.relations-list .body .cell {\r\n    padding-right: 5px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.relations-list .body .md-button {\r\n    margin: 0;\r\n}\r\n\r\n",
                 "customFunction": "let $injector = widgetContext.$scope.$injector;\r\nlet customDialog = $injector.get(widgetContext.servicesMap.get('customDialog'));\r\nlet assetService = $injector.get(widgetContext.servicesMap.get('assetService'));\r\nlet deviceService = $injector.get(widgetContext.servicesMap.get('deviceService'));\r\nlet attributeService = $injector.get(widgetContext.servicesMap.get('attributeService'));\r\nlet entityRelationService = $injector.get(widgetContext.servicesMap.get('entityRelationService'));\r\nlet userSettingsService = $injector.get(widgetContext.servicesMap.get('userSettingsService'));\r\n\r\nopenAddEntityDialog();\r\n\r\nfunction openAddEntityDialog() {\r\n    customDialog.customDialog(htmlTemplate, AddEntityDialogController).subscribe();\r\n}\r\n\r\nfunction AddEntityDialogController(instance) {\r\n    let vm = instance;\r\n    let userSettings;\r\n    userSettingsService.loadUserSettings().subscribe(settings=> {\r\n        userSettings = settings;\r\n        if (!userSettings.createdGatewaysCount) userSettings.createdGatewaysCount = 0;\r\n    });\r\n    \r\n\r\n    vm.addEntityFormGroup = vm.fb.group({\r\n     entityName: ['', [vm.validators.required, vm.validators.pattern(/.*\\S.*/)]],\r\n     entityType: ['DEVICE'],\r\n     entityLabel: [''],\r\n     type: ['', [vm.validators.required]],\r\n    });\r\n\r\n    vm.cancel = function() {\r\n        vm.dialogRef.close(null);\r\n    };\r\n\r\n\r\n    vm.save = function($event) {\r\n        vm.addEntityFormGroup.markAsPristine();\r\n        saveEntityObservable().subscribe(\r\n            function (device) {\r\n                widgetContext.updateAliases();\r\n                userSettingsService.putUserSettings({ createdGatewaysCount: ++userSettings.createdGatewaysCount }).subscribe(_=>{\r\n                });\r\n                vm.dialogRef.close(null);\r\n                openCommandDialog(device, $event);\r\n            }\r\n        );\r\n    };\r\n    \r\n    function openCommandDialog(device, $event) {\r\n        vm.device = device;\r\n        let openCommandAction = widgetContext.actionsApi.getActionDescriptors(\"actionCellButton\").find(action => action.name == \"Launch command\");\r\n        setTimeout(() => {\r\n            widgetContext.actionsApi.handleWidgetAction($event, openCommandAction, device.id, device.name, {newDevice: true});\r\n        });\r\n        goToConfigState();\r\n    }\r\n\r\n    \r\n    function goToConfigState() {\r\n        const stateParams = {};\r\n        stateParams.entityId = vm.device.id;\r\n        stateParams.entityName = vm.device.name;\r\n        const newStateParams = {\r\n            targetEntityParamName: 'default',\r\n            new_gateway: {\r\n                entityId: vm.device.id,\r\n                entityName: vm.device.name\r\n            }\r\n        }\r\n        const params = {...stateParams, ...newStateParams};\r\n        widgetContext.stateController.openState('gateway_details', params, false);\r\n    }\r\n\r\n    function saveEntityObservable() {\r\n        const formValues = vm.addEntityFormGroup.value;\r\n        let entity = {\r\n            name: formValues.entityName.trim(),\r\n            type: formValues.type,\r\n            label: formValues.entityLabel,\r\n            additionalInfo: {\r\n                gateway: true\r\n            }\r\n        };\r\n        return deviceService.saveDevice(entity);\r\n    }\r\n}\r\n",
                 "customResources": [],
@@ -1305,50 +1305,7 @@
               "name": null,
               "entityAliasId": "a2f01c66-96cf-49c5-303f-e6f21c559ee8",
               "filterId": null,
-              "dataKeys": [
-                {
-                  "name": "SERVICE_LOGS",
-                  "type": "timeseries",
-                  "label": "Status",
-                  "color": "#4caf50",
-                  "settings": {
-                    "useCellStyleFunction": false,
-                    "useCellContentFunction": true,
-                    "cellContentFunction": "let cssClass;\r\nswitch (value) {\r\n      case \"DEBUG\":\r\n        cssClass = \"status status-debug\";\r\n        break;\r\n      case \"WARNING\":\r\n        cssClass = \"status status-warning\";\r\n        break;\r\n      case \"ERROR\":\r\n      case \"EXCEPTION\":\r\n        cssClass = \"status status-error\";\r\n        break;\r\n      case \"INFO\":\r\n      default:\r\n        cssClass = \"status status-info\";\r\n        break;\r\n    }\r\n    \r\n    return `<span class='${cssClass}'>${value}</span>`;"
-                  },
-                  "_hash": 0.6667576563240645,
-                  "aggregationType": null,
-                  "units": null,
-                  "decimals": null,
-                  "funcBody": null,
-                  "usePostProcessing": true,
-                  "postFuncBody": "if (value.includes(\"RPC\")&&!value.includes(\"GRPC\")) {\n    let parsedValue = value.match(/\\|(\\w+)\\|/);\n    parsedValue = parsedValue ? parsedValue[1] :\n    parsedValue;\n    return parsedValue || value;\n} else return '';"
-                },
-                {
-                  "name": "SERVICE_LOGS",
-                  "type": "timeseries",
-                  "label": "Details",
-                  "color": "#2196f3",
-                  "settings": {
-                    "useCellStyleFunction": false,
-                    "useCellContentFunction": true,
-                    "cellContentFunction": "let statusValue = value.match(/\\|(\\w+)\\|/); \r\nstatusValue =  statusValue? statusValue[1] : statusValue;\r\nlet cssClass = statusValue === \"EXCEPTION\" ?\r\n    \"msg-status-exception\" : 'msg';\r\nlet parsedValue = /\\[(.*)/.exec(value);\r\nparsedValue = parsedValue ? parsedValue[0] : parsedValue;\r\nreturn `<span class='${cssClass}'>${parsedValue || value}</span>`;"
-                  },
-                  "_hash": 0.6931154680365814,
-                  "aggregationType": null,
-                  "units": null,
-                  "decimals": null,
-                  "funcBody": null,
-                  "usePostProcessing": true,
-                  "postFuncBody": "if (value.includes(\"RPC\")&&!value.includes(\"GRPC\")) {\n    return value;\n} else return '';"
-                }
-              ],
-              "alarmFilterConfig": {
-                "statusList": [
-                  "ACTIVE"
-                ]
-              },
-              "latestDataKeys": []
+              "dataKeys": []
             }
           ],
           "timewindow": {
@@ -1361,135 +1318,49 @@
             "selectedTab": 0,
             "realtime": {
               "realtimeType": 0,
-              "timewindowMs": 604800000,
+              "timewindowMs": 43200000,
               "quickInterval": "CURRENT_DAY",
               "interval": 1000
             },
             "aggregation": {
               "type": "NONE",
-              "limit": 200
-            }
+              "limit": 25000
+            },
+            "timezone": null
           },
           "showTitle": true,
-          "backgroundColor": "rgb(255, 255, 255)",
+          "backgroundColor": "#fff",
           "color": "rgba(0, 0, 0, 0.87)",
           "padding": "8px",
           "settings": {
-            "enableSearch": true,
-            "enableSelectColumnDisplay": true,
-            "enableStickyHeader": true,
-            "enableStickyAction": true,
-            "showCellActionsMenu": true,
-            "reserveSpaceForHiddenAction": "true",
-            "showTimestamp": true,
-            "showMilliseconds": false,
-            "displayPagination": true,
-            "useEntityLabel": false,
-            "defaultPageSize": 10,
-            "hideEmptyLines": true,
-            "disableStickyHeader": false,
-            "useRowStyleFunction": false
+            "isConnectorLog": true,
+            "connectorLogState": "connector_rpc",
+            "isRpcLog": true
           },
           "title": "RPC Logs",
+          "showTitleIcon": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "widgetStyle": {},
+          "widgetCss": "",
+          "pageSize": 1024,
+          "noDataDisplayMessage": "",
+          "enableDataExport": false,
+          "showLegend": false,
+          "useDashboardTimewindow": false,
+          "displayTimewindow": true,
+          "titleTooltip": "",
           "titleStyle": {
             "fontSize": "16px",
             "fontWeight": 600,
             "padding": "5px 10px 5px 10px"
           },
-          "useDashboardTimewindow": false,
-          "showLegend": false,
-          "widgetStyle": {},
-          "actions": {},
-          "showTitleIcon": false,
-          "iconColor": "rgba(0, 0, 0, 0.87)",
-          "iconSize": "24px",
-          "displayTimewindow": true,
-          "titleTooltip": "",
-          "widgetCss": ".status {\r\n    border-radius: 20px;\r\n    font-weight: 500;\r\n    padding: 5px 15px;\r\n}\r\n\r\n.status-debug {\r\n    color: green;\r\n    background: rgba(0, 128, 0, 0.1);\r\n}\r\n\r\n.status-warning {\r\n    color: orange;\r\n    background: rgba(255, 165, 0, 0.1);\r\n}\r\n\r\n.status-error {\r\n    color: red;\r\n    background: rgba(255, 0, 0, 0.1);\r\n}\r\n\r\n.status-info {\r\n    color: blue;\r\n    background: rgba(0, 0, 128, 0.1);\r\n}\r\n\r\n.msg-status-exception {\r\n    color: red;\r\n}",
-          "pageSize": 1024,
-          "noDataDisplayMessage": "",
-          "enableDataExport": false,
           "borderRadius": "4px"
         },
         "row": 0,
         "col": 0,
         "id": "0fc7dcf3-32a2-0159-738e-96956bf0d450",
-        "typeFullFqn": "system.cards.timeseries_table"
-      },
-      "6e136fbc-545b-4926-c0a9-79348f35628a": {
-        "type": "rpc",
-        "sizeX": 9.5,
-        "sizeY": 5.5,
-        "config": {
-          "targetDeviceAliases": [],
-          "showTitle": true,
-          "backgroundColor": "#010101",
-          "color": "rgba(255, 254, 254, 0.87)",
-          "padding": "0px",
-          "settings": {
-            "parseGpioStatusFunction": "return body[pin] === true;",
-            "gpioStatusChangeRequest": {
-              "method": "setGpioStatus",
-              "paramsBody": "{\n   \"pin\": \"{$pin}\",\n   \"enabled\": \"{$enabled}\"\n}"
-            },
-            "requestTimeout": 500,
-            "switchPanelBackgroundColor": "#b71c1c",
-            "gpioStatusRequest": {
-              "method": "getGpioStatus",
-              "paramsBody": "{}"
-            },
-            "gpioList": [
-              {
-                "pin": 1,
-                "label": "GPIO 1",
-                "row": 0,
-                "col": 0,
-                "_uniqueKey": 0
-              },
-              {
-                "pin": 2,
-                "label": "GPIO 2",
-                "row": 0,
-                "col": 1,
-                "_uniqueKey": 1
-              },
-              {
-                "pin": 3,
-                "label": "GPIO 3",
-                "row": 1,
-                "col": 0,
-                "_uniqueKey": 2
-              }
-            ]
-          },
-          "title": "New RPC debug terminal",
-          "dropShadow": true,
-          "enableFullscreen": true,
-          "widgetStyle": {},
-          "titleStyle": {
-            "fontSize": "16px",
-            "fontWeight": 400
-          },
-          "showLegend": false,
-          "actions": {},
-          "datasources": [],
-          "showTitleIcon": false,
-          "titleTooltip": "",
-          "widgetCss": "",
-          "pageSize": 1024,
-          "noDataDisplayMessage": "",
-          "borderRadius": "4px",
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "a2f01c66-96cf-49c5-303f-e6f21c559ee8"
-          }
-        },
-        "row": 0,
-        "col": 0,
-        "id": "6e136fbc-545b-4926-c0a9-79348f35628a",
-        "typeFullFqn": "system.control_widgets.rpc_debug_terminal"
+        "typeFullFqn": "system.gateway_widgets.gateway_logs"
       },
       "fb9df382-6ef3-4aa6-bc13-8bf8e300ba19": {
         "type": "latest",
@@ -1536,7 +1407,7 @@
                 "useShowWidgetActionFunction": null,
                 "showWidgetActionFunction": "return true;",
                 "type": "customPretty",
-                "customHtml": "<div class=\"container\">\n    <mat-toolbar class=\"flex flex-row items-center\" color=\"primary\">\n        <h2>{{ 'gateway.launch-command' | translate }}</h2>\n        <span class=\"flex-1\"></span>\n        <div [tb-help]=\"'gatewayInstall'\"></div>\n        <button mat-icon-button (click)=\"cancel()\" type=\"button\">\n            <mat-icon class=\"material-icons\">close</mat-icon>\n        </button>\n    </mat-toolbar>\n    <tb-gateway-command [deviceId]=\"entityId\"></tb-gateway-command>\n    <div mat-dialog-actions class=\"flex flex-row justify-end items-center\">\n        <button mat-button color=\"primary\"\n            type=\"button\"\n            (click)=\"cancel()\" cdkFocusInitial>\n            {{ 'action.close' | translate }}\n        </button>\n    </div>\n</div>\n",
+                "customHtml": "<div class=\"container\">\n    <mat-toolbar color=\"tb-primary\" class=\"tb-bottom-border flex flex-row items-center\">\n        <h2>{{ 'gateway.launch-command' | translate }}</h2>\n        <span class=\"flex-1\"></span>\n        <div [tb-help]=\"'gatewayInstall'\"></div>\n        <button mat-icon-button (click)=\"cancel()\" type=\"button\">\n            <mat-icon class=\"material-icons\">close</mat-icon>\n        </button>\n    </mat-toolbar>\n    <tb-gateway-command [deviceId]=\"entityId\"></tb-gateway-command>\n    <div mat-dialog-actions class=\"flex flex-row justify-end items-center\">\n        <button mat-button color=\"primary\"\n            type=\"button\"\n            (click)=\"cancel()\" cdkFocusInitial>\n            {{ 'action.close' | translate }}\n        </button>\n    </div>\n</div>\n",
                 "customCss": ".container {\n    display: grid;\n    grid-template-rows: min-content minmax(auto, 1fr) min-content;\n    height: 100%;\n    max-height: 100vh;\n    width: 600px;\n    max-width: 100%;\n}",
                 "customFunction": "let $injector = widgetContext.$scope.$injector;\nlet customDialog = $injector.get(widgetContext.servicesMap.get('customDialog'));\n\nopenCommands();\n\nfunction openCommands() {\n    customDialog.customDialog(htmlTemplate, CommandsDialogController, {panelClass: \"test\"}).subscribe();\n}\n\nfunction CommandsDialogController(instance) {\n    let vm = instance;\n    \n    vm.entityId = entityId.id;\n\n    vm.cancel = function() {\n        vm.dialogRef.close(null);\n    };\n}\n",
                 "customResources": [
@@ -4357,6 +4228,14 @@
                   "color": "#2196f3",
                   "settings": {},
                   "_hash": 0.3480165322736335
+                },
+                {
+                  "name": "Version",
+                  "type": "attribute",
+                  "label": "Version",
+                  "color": "#4caf50",
+                  "settings": {},
+                  "_hash": 0.5839614727034592
                 }
               ],
               "alarmFilterConfig": {
@@ -4373,7 +4252,7 @@
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextPattern": "let buttonsHtml = \"\" \nctx.actionsApi.getActionDescriptors('elementClick').forEach((btn, index)=>{\n    let disabled = false;\n    if (index == 2) {\n        disabled = data[0] && data[0].RemoteLoggingLevel ? data[0].RemoteLoggingLevel == \"NONE\" : true;\n    } else if (index == 4) {\n        const conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\n        disabled = !conf.remoteShell;\n    }\n    buttonsHtml += `<button mat-raised-button disabled=${disabled} color=\"primary\" (click)=\"ctx.actionsApi.handleWidgetAction($event, ctx.actionsApi.getActionDescriptors('elementClick')[${index}], ctx.datasources[0].entity.id)\" class=\"w-full md:w-1/2\">${btn.displayName}</button>`\n});\n\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">${buttonsHtml}</div>`;",
-            "markdownTextFunction": "const currentState = ctx.stateController.getStateId();\nconst conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : {};\nconst disabled = !conf.statistics?.enableCustom;\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'storage_statistics'}\" color=\"primary\" id=\"storage_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.storage-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'machine_statistics'}\" color=\"primary\" id=\"machine_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.machine-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'custom_statistics'}\" disabled=\"${disabled}\" color=\"primary\" id=\"custom_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.custom-statistics' | translate }}\n</button>\n</div>`;",
+            "markdownTextFunction": "const currentState = ctx.stateController.getStateId();\nconst conf = data[0].general_configuration ? JSON.parse(data[0].general_configuration) : null;\nconst stats = conf?.statistics;\nconst [major = 0, minor = 0, patch = 0] = String(data[0].Version ?? '').split('.').map(part => parseInt(part, 10) || 0);\nconst hasUpdatedStatistics = major !== 3 ? major > 3 : minor !== 7 ? minor > 7 : patch >= 3;\nconst customEnabled = hasUpdatedStatistics ? (stats?.enableCustom ?? stats?.enable) : stats?.enable;\nconst disabled = !conf || !customEnabled;\nreturn `<div class=\"action-buttons-container flex flex-col md:flex-row flex-wrap gap-1\">\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'storage_statistics'}\" color=\"primary\" id=\"storage_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.storage-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'machine_statistics'}\" color=\"primary\" id=\"machine_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.machine-statistics' | translate }}\n</button>\n<button mat-stroked-button [class.tb-primary-fill]=\"${currentState === 'custom_statistics'}\" disabled=\"${disabled}\" color=\"primary\" id=\"custom_statistics\" class=\"w-full md:w-1/2\">\n{{ 'gateway.statistics-nav-widget.custom-statistics' | translate }}\n</button>\n</div>`;",
             "applyDefaultMarkdownStyle": false,
             "markdownCss": ".action-buttons-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    flex-direction: row;\r\n    height: 100%;\r\n    width: 100%;\r\n    align-content: start;\r\n}\r\n\r\nbutton {\r\n    flex-grow: 1;\r\n    margin: 10px;\r\n    min-width: 150px;\r\n    height: auto;\r\n    line-height: 36px;\r\n}"
           },
@@ -7607,13 +7486,6 @@
                 "col": 0,
                 "mobileOrder": 1,
                 "mobileHeight": null
-              },
-              "6e136fbc-545b-4926-c0a9-79348f35628a": {
-                "sizeX": 48,
-                "sizeY": 9,
-                "row": 23,
-                "col": 0,
-                "mobileOrder": 2
               }
             },
             "gridSettings": {
