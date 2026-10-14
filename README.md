@@ -1,6 +1,20 @@
 # ThingsBoard Gateway Management Extension Distributions
 
 The project offers distribution files for the [ThingsBoard Gateway Management Extension v1.0][1], designed to streamline gateway configuration and connector management using a modular, component-based approach.
+
+## Which Branch to Use
+
+Download the files from the branch that matches your ThingsBoard version:
+
+| ThingsBoard | Branch |
+|---|---|
+| 4.4.x | `release/4.4.0` |
+| 4.3.x | `release/4.3.0` |
+| 4.2.x | `release/4.2` (same content as `release/4.2.0`) |
+
+Contributors: see [CONTRIBUTING.md](CONTRIBUTING.md) for the branch model and
+where to open pull requests.
+
 ## Steps to Run the Extension
 
 ### 1. Access Files
