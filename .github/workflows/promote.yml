@@ -1,0 +1,85 @@
+name: Promote test build
+
+# Opens (or refreshes) a PR from a dist test branch into each release branch of its line.
+# A person merges it, always with a merge commit.
+on:
+  workflow_dispatch:
+    inputs:
+      line:
+        description: Product line to promote
+        type: choice
+        options: [lts, '4.4']
+        required: true
+
+concurrency:
+  group: promote-${{ inputs.line }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Open or update promotion PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LINE: ${{ inputs.line }}
+          SOURCE_REPO: ${{ vars.SOURCE_REPO || 'thingsboard/gateway-management-extensions' }}
+        run: |
+          set -euo pipefail
+          # Product line -> dist test branch and the release branches it is promoted to.
+          case "$LINE" in
+            lts) head=rc-lts; bases="release/4.2 release/4.2.0 release/4.3.0" ;;
+            4.4) head=rc; bases="release/4.4.0" ;;
+            *) echo "::error::Unknown line $LINE"; exit 1 ;;
+          esac
+          repo=$GITHUB_REPOSITORY
+          source_url="$GITHUB_SERVER_URL/$SOURCE_REPO"
+
+          # Latest Source-Commit trailer reachable from a dist ref, empty when there is none.
+          source_commit() {
+            gh api "repos/$repo/commits?sha=$1&path=resources/gateway-management-extension.js&per_page=100" \
+              --jq '[.[].commit.message | capture("Source-Commit: (?<sha>[0-9a-f]{40})") | .sha] | first // empty'
+          }
+
+          to=$(source_commit "$head")
+          for base in $bases; do
+            compare=$(gh api "repos/$repo/compare/$base...$head")
+            if [ "$(jq '.ahead_by' <<<"$compare")" -eq 0 ]; then
+              echo "$base: up to date with $head"
+              continue
+            fi
+
+            from=$(source_commit "$base")
+            if [ -n "$from" ] && [ -n "$to" ]; then
+              source_link="[\`${from::7}...${to::7}\`]($source_url/compare/$from...$to)"
+            elif [ -n "$to" ]; then
+              source_link="[\`${to::7}\`]($source_url/commit/$to)"
+            else
+              source_link="no \`Source-Commit\` in \`$head\` yet"
+            fi
+            {
+              echo "Promotes \`$head\` into \`$base\`."
+              echo
+              echo "Source changes: $source_link"
+              echo
+              echo "### Commits"
+              echo
+              jq -r '.commits[] | "- \(.commit.message | split("\n") | first) (\(.sha[0:7]))"' <<<"$compare"
+              echo
+              echo "> **Merge with a merge commit.** Squash or rebase gives \`$base\` new SHAs, and every later promotion from \`$head\` would carry these commits again."
+            } > body.md
+
+            number=$(gh pr list -R "$repo" --head "$head" --base "$base" --state open \
+              --json number,isCrossRepository --jq 'map(select(.isCrossRepository | not)) | first | .number // empty')
+            if [ -n "$number" ]; then
+              gh pr edit "$number" -R "$repo" --body-file body.md
+              echo "$base: updated PR #$number"
+            else
+              gh pr create -R "$repo" --head "$head" --base "$base" --title "Promote $head → $base" --body-file body.md
+            fi
+          done
