@@ -1,0 +1,266 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "library",
+          "name": "cyclonedx-library",
+          "group": "@cyclonedx",
+          "version": "10.3.0",
+          "author": "Jan Kowalleck",
+          "description": "Core functionality of CycloneDX for JavaScript (Node.js or WebBrowser).",
+          "licenses": [
+            {
+              "license": {
+                "id": "Apache-2.0"
+              }
+            }
+          ],
+          "externalReferences": [
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-javascript-library/issues",
+              "type": "issue-tracker",
+              "comment": "as detected from PackageJson property \"bugs.url\""
+            },
+            {
+              "url": "git+https://github.com/CycloneDX/cyclonedx-javascript-library.git",
+              "type": "vcs",
+              "comment": "as detected from PackageJson property \"repository.url\""
+            },
+            {
+              "url": "https://github.com/CycloneDX/cyclonedx-javascript-library#readme",
+              "type": "website",
+              "comment": "as detected from PackageJson property \"homepage\""
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:npm:package:constraint:engine:node",
+              "value": ">=20.18.0"
+            }
+          ]
+        }
+      ]
+    },
+    "component": {
+      "type": "library",
+      "name": "gateway-management-extension",
+      "version": "3914aebf9b72852cfd3b892dad58b7f84c41003d",
+      "bom-ref": "pkg:github/thingsboard/gateway-management-extensions@3914aebf9b72852cfd3b892dad58b7f84c41003d",
+      "supplier": {
+        "name": "ThingsBoard, Inc.",
+        "url": [
+          "https://thingsboard.io/"
+        ]
+      },
+      "description": "ThingsBoard Gateway Management Extension",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b4cf205e4d24493f9e27982c0704947a8d00d550203d87e05e990d96fd063013"
+        },
+        {
+          "alg": "SHA-512",
+          "content": "71aa0f6224d946fe7a20acd3cd8ee13640b2fb23d2f1b8b8574760dc287e00f269a69091a0dbf77aec02339f86c3398f502c0c998907c7f1d567ffb121adf169"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:github/thingsboard/gateway-management-extensions@3914aebf9b72852cfd3b892dad58b7f84c41003d",
+      "externalReferences": [
+        {
+          "url": "https://github.com/thingsboard/gateway-management-extensions/tree/3914aebf9b72852cfd3b892dad58b7f84c41003d",
+          "type": "vcs"
+        }
+      ]
+    },
+    "supplier": {
+      "name": "ThingsBoard, Inc.",
+      "url": [
+        "https://thingsboard.io/"
+      ]
+    },
+    "properties": [
+      {
+        "name": "cdx:reproducible",
+        "value": "true"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "core",
+      "group": "@angular",
+      "version": "18.2.6",
+      "bom-ref": "pkg:npm/%40angular/core@18.2.6",
+      "author": "angular",
+      "description": "Angular - the core framework",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40angular/core@18.2.6",
+      "externalReferences": [
+        {
+          "url": "https://registry.yarnpkg.com/@angular/core/-/core-18.2.6.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "3e315a7768f8601c0b553c3ed137bc08909afed5745bc71a4c71bc68e8e3dce6dd2fa8a1188f852a7c1eacb73d455cc315dd7804e3b80baffe2db390021dcbb7"
+            }
+          ],
+          "comment": "as detected from yarn.lock property \"resolved\""
+        },
+        {
+          "url": "https://github.com/angular/angular/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "git+https://github.com/angular/angular.git#packages/core",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\" and \"repository.directory\""
+        },
+        {
+          "url": "https://github.com/angular/angular#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:constraint:engine:node",
+          "value": "^18.19.1 || ^20.11.1 || >=22.0.0"
+        },
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@angular/core"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "echarts",
+      "version": "5.5.4-TB",
+      "bom-ref": "pkg:npm/echarts@5.5.4-TB?download_url=https%3A%2F%2Fgithub.com%2Fthingsboard%2Fecharts%2Farchive%2F5.5.4-TB.tar.gz",
+      "description": "Apache ECharts is a powerful, interactive charting and data visualization library for browser",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/echarts@5.5.4-TB?download_url=https%3A%2F%2Fgithub.com%2Fthingsboard%2Fecharts%2Farchive%2F5.5.4-TB.tar.gz",
+      "externalReferences": [
+        {
+          "url": "https://github.com/thingsboard/echarts/archive/5.5.4-TB.tar.gz",
+          "type": "distribution",
+          "comment": "as detected from yarn.lock property \"resolved\""
+        },
+        {
+          "url": "https://github.com/thingsboard/echarts/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "git+https://github.com/thingsboard/echarts.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/thingsboard/echarts",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/echarts"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "zrender",
+      "version": "5.5.1-TB",
+      "bom-ref": "pkg:npm/zrender@5.5.1-TB?download_url=https%3A%2F%2Fgithub.com%2Fthingsboard%2Fzrender%2Farchive%2F5.5.1-TB.tar.gz",
+      "description": "A lightweight graphic library providing 2d draw for Apache ECharts",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/zrender@5.5.1-TB?download_url=https%3A%2F%2Fgithub.com%2Fthingsboard%2Fzrender%2Farchive%2F5.5.1-TB.tar.gz",
+      "externalReferences": [
+        {
+          "url": "https://github.com/thingsboard/zrender/archive/5.5.1-TB.tar.gz",
+          "type": "distribution",
+          "comment": "as detected from yarn.lock property \"resolved\""
+        },
+        {
+          "url": "https://github.com/thingsboard/zrender/issues",
+          "type": "issue-tracker",
+          "comment": "as detected from PackageJson property \"bugs.url\""
+        },
+        {
+          "url": "git+https://github.com/thingsboard/zrender.git",
+          "type": "vcs",
+          "comment": "as detected from PackageJson property \"repository.url\""
+        },
+        {
+          "url": "https://github.com/thingsboard/zrender#readme",
+          "type": "website",
+          "comment": "as detected from PackageJson property \"homepage\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/zrender"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:github/thingsboard/gateway-management-extensions@3914aebf9b72852cfd3b892dad58b7f84c41003d",
+      "dependsOn": [
+        "pkg:npm/%40angular/core@18.2.6",
+        "pkg:npm/echarts@5.5.4-TB?download_url=https%3A%2F%2Fgithub.com%2Fthingsboard%2Fecharts%2Farchive%2F5.5.4-TB.tar.gz"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40angular/core@18.2.6"
+    },
+    {
+      "ref": "pkg:npm/echarts@5.5.4-TB?download_url=https%3A%2F%2Fgithub.com%2Fthingsboard%2Fecharts%2Farchive%2F5.5.4-TB.tar.gz",
+      "dependsOn": [
+        "pkg:npm/zrender@5.5.1-TB?download_url=https%3A%2F%2Fgithub.com%2Fthingsboard%2Fzrender%2Farchive%2F5.5.1-TB.tar.gz"
+      ]
+    },
+    {
+      "ref": "pkg:npm/zrender@5.5.1-TB?download_url=https%3A%2F%2Fgithub.com%2Fthingsboard%2Fzrender%2Farchive%2F5.5.1-TB.tar.gz"
+    }
+  ]
+}
