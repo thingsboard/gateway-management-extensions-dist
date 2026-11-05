@@ -2,8 +2,8 @@
 
 This repository holds the built distribution of
 [gateway-management-extensions](https://github.com/thingsboard/gateway-management-extensions):
-the compiled `gateway-management-extension.js`, the widget bundles and the
-Gateways dashboard. Source changes to the extension itself are made in that
+the compiled `gateway-management-extension.js` with its SBOM, the widget
+bundles and the Gateways dashboard. Source changes to the extension itself are made in that
 repository; see its `CONTRIBUTING.md`.
 
 ## Branches
@@ -56,6 +56,7 @@ Only these two files may differ. Anything else that diverges is a bug.
 | File | Why it differs |
 |---|---|
 | `resources/gateway-management-extension.js` | Different source branch and Angular version (see above). |
+| `sbom/gateway-management-extension.cdx.json` | The SBOM of the `.js` on the same branch. |
 | `dashboards/gateways_dashboard.json` | `rc` uses features that exist only in ThingsBoard 4.4. |
 
 The ThingsBoard 4.4-only dashboard features are:
@@ -120,20 +121,38 @@ source branches:
    yarn install && yarn build
    ```
 
-   The result is `target/generated-resources/gateway-management-extension.js`.
-2. Check the markers above (Angular version, no `ngDevMode`).
-3. Copy it to `resources/gateway-management-extension.js` on a branch from
-   `rc-lts` or `rc`. Name the source commit in the commit message, for example
+   The result is `target/generated-resources/gateway-management-extension.js`
+   and its CycloneDX SBOM, `gateway-management-extension.cdx.json`, next to it.
+2. Check the markers above (Angular version, no `ngDevMode`). Check that the
+   SBOM's version is the source commit and does not end in `-dirty`: a
+   `-dirty` build had uncommitted changes and must not be published.
+3. Copy the `.js` to `resources/gateway-management-extension.js` and the
+   `.cdx.json` to `sbom/gateway-management-extension.cdx.json` on a branch from
+   `rc-lts` or `rc`. Always copy the two files from the same build. Name the
+   source commit in the commit message, for example
    `Updated build from gateway-management-extensions master (db5e414)`.
 4. Open the pull request against that branch.
+
+Never put the SBOM in `resources/`. ThingsBoard syncs this repository at
+runtime and loads every file in `resources/` as a JS module.
+
+To check that the two files belong together, compare the `.js` hash with the
+one the SBOM records:
+
+```bash
+sha256sum resources/gateway-management-extension.js
+jq -r '.metadata.component.hashes[] | select(.alg == "SHA-256").content' \
+  sbom/gateway-management-extension.cdx.json
+```
 
 A source change that reaches both source branches therefore needs two build
 pull requests here: one into `rc-lts` and one into `rc`.
 
 ## Merging `rc-lts` forward into `rc`
 
-`resources/gateway-management-extension.js` conflicts on every merge, because
-the two builds always differ. **Resolve it by keeping the `rc` build.** Do this
+`resources/gateway-management-extension.js` and its SBOM conflict on every
+merge, because the two builds always differ. **Resolve them by keeping the `rc`
+build.** Do this
 on a separate branch rather than in `rc-lts`, so that `rc-lts` never receives
 anything from `rc`:
 
@@ -141,8 +160,8 @@ anything from `rc`:
 git fetch origin
 git switch -c merge/rc-lts-into-rc-$(date +%Y%m%d) origin/rc
 git merge origin/rc-lts
-git checkout --ours resources/gateway-management-extension.js
-git add resources/gateway-management-extension.js
+git checkout --ours resources/gateway-management-extension.js sbom/gateway-management-extension.cdx.json
+git add resources/gateway-management-extension.js sbom/gateway-management-extension.cdx.json
 git commit --no-edit
 git push -u origin HEAD
 gh pr create --base rc --title "Merge rc-lts into rc"

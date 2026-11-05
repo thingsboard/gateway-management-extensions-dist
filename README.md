@@ -40,4 +40,11 @@ where to open pull requests.
 ### 4. Update the Gateways Dashboard
 - Upload or update the Gateways Dashboard using the `gateways_dashboard.json` dashboard file.
 
+## SBOM
+
+`sbom/gateway-management-extension.cdx.json` is the CycloneDX SBOM of
+`resources/gateway-management-extension.js` on the same branch. It records the
+source commit the `.js` was built from, the `.js` hashes, and the third-party
+packages bundled into it. You don't upload it to ThingsBoard.
+
 [1]: https://github.com/thingsboard/gateway-management-extensions
