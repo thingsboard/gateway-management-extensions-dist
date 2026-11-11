@@ -49,8 +49,8 @@
     "component": {
       "type": "library",
       "name": "gateway-management-extension",
-      "version": "ad35b4bb843b4743516186513de0de2036eba698",
-      "bom-ref": "pkg:github/thingsboard/gateway-management-extensions@ad35b4bb843b4743516186513de0de2036eba698",
+      "version": "061c2598699004d1a01662f7794bbe27d201269a",
+      "bom-ref": "pkg:github/thingsboard/gateway-management-extensions@061c2598699004d1a01662f7794bbe27d201269a",
       "supplier": {
         "name": "ThingsBoard, Inc.",
         "url": [
@@ -61,11 +61,11 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "88a02bcc1834d6b31dbf209b1cec8b72df8a6e8abe2ef23979c89bf2fb19002b"
+          "content": "94205e66660b9e3b45492f7898682ba9b372de5657e7b27e3599240449a178fe"
         },
         {
           "alg": "SHA-512",
-          "content": "3edf11e676df22b2069c5f2a9f22fb582259d9f8df65f13696ef57c6286d12dd3d1ae912ca0154896d1fb286a8ebec288bb907af14fe24c77de272c419d74252"
+          "content": "87585e65384ef5871bcc83814078e93b38d658c033d73fa7931e9088cd9cb9b277a78de5b57b1481c56009ae18bbd7356b31d426b08f818be6ecc89587dd78ec"
         }
       ],
       "licenses": [
@@ -75,10 +75,10 @@
           }
         }
       ],
-      "purl": "pkg:github/thingsboard/gateway-management-extensions@ad35b4bb843b4743516186513de0de2036eba698",
+      "purl": "pkg:github/thingsboard/gateway-management-extensions@061c2598699004d1a01662f7794bbe27d201269a",
       "externalReferences": [
         {
-          "url": "https://github.com/thingsboard/gateway-management-extensions/tree/ad35b4bb843b4743516186513de0de2036eba698",
+          "url": "https://github.com/thingsboard/gateway-management-extensions/tree/061c2598699004d1a01662f7794bbe27d201269a",
           "type": "vcs"
         }
       ]
@@ -188,7 +188,7 @@
   ],
   "dependencies": [
     {
-      "ref": "pkg:github/thingsboard/gateway-management-extensions@ad35b4bb843b4743516186513de0de2036eba698",
+      "ref": "pkg:github/thingsboard/gateway-management-extensions@061c2598699004d1a01662f7794bbe27d201269a",
       "dependsOn": [
         "pkg:npm/echarts@5.5.4-TB?download_url=https%3A%2F%2Fgithub.com%2Fthingsboard%2Fecharts%2Farchive%2F5.5.4-TB.tar.gz"
       ]
